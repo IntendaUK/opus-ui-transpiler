@@ -1,0 +1,11 @@
+{
+	"name": "@intenda/opus-ui-transpiler",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node src/index.js"
+	},
+	"author": "",
+	"license": "ISC"
+}
