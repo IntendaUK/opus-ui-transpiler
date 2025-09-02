@@ -1,0 +1,128 @@
+{
+	"acceptPrps": {},
+	"scope": "modalMakeSale",
+	"prps": {
+		"itemName": "",
+		"itemPrice": 0,
+		"itemQuantity": 0
+	},
+	"traits": [
+		{
+			"trait": "./scpsModal",
+			"traitPrps": {}
+		},
+		{
+			"trait": "shared/modal",
+			"traitPrps": {
+				"prpsContainer": {
+					"height": "auto"
+				},
+				"wgts": [
+					{
+						"type": "containerSimple",
+						"prps": {},
+						"wgts": [
+							{
+								"type": "containerSimple",
+								"prps": {
+									"gap": "12px"
+								},
+								"wgts": [
+									{
+										"type": "label",
+										"prps": {
+											"color": "accentLight",
+											"cpt": "Make Sale",
+											"fontSize": "36px"
+										}
+									},
+									{
+										"traits": [
+											{
+												"trait": "./receipt",
+												"traitPrps": {}
+											}
+										]
+									},
+									{
+										"traits": [
+											{
+												"trait": "./inputItemName",
+												"traitPrps": {}
+											}
+										]
+									},
+									{
+										"traits": [
+											{
+												"trait": "./inputItemQuantity",
+												"traitPrps": {}
+											}
+										]
+									}
+								]
+							},
+							{
+								"type": "containerSimple",
+								"prps": {
+									"dir": "horizontal",
+									"mainAxisAlign": "start",
+									"crossAxisAlign": "center",
+									"marginTop": "36px"
+								},
+								"wgts": [
+									{
+										"traits": [
+											{
+												"trait": "shared/button",
+												"traitPrps": {
+													"icon": "close",
+													"cpt": "Cancel",
+													"prpsContainer": {
+														"dir": "horizontal"
+													},
+													"color": "teal",
+													"fireScript": {
+														"actions": [
+															{
+																"type": "setState",
+																"target": "||modalMakeSale||",
+																"key": "vis",
+																"value": false
+															}
+														]
+													}
+												}
+											}
+										]
+									},
+									{
+										"relId": "btnAddAnother",
+										"traits": [
+											{
+												"trait": "./btnAddAnother",
+												"traitPrps": {}
+											}
+										],
+										"prps": {
+											"marginLeft": "auto"
+										}
+									},
+									{
+										"relId": "btnOk",
+										"traits": [
+											{
+												"trait": "./btnOk",
+												"traitPrps": {}
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	]
+}

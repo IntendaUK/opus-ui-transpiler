@@ -1,0 +1,207 @@
+{
+	"acceptPrps": {},
+	"type": "containerSimple",
+	"prps": {
+		"flex": true,
+		"marginTop": "36px",
+		"backgroundColor": "secondaryOrange",
+		"width": "100%",
+		"roundedBorders": true,
+		"borderRadius": "12px",
+		"padding": true,
+		"paddingSize": "smallPadding",
+		"gap": "12px",
+		"scps": [
+			{
+				"triggers": [
+					{
+						"event": "onComponentResized"
+					}
+				],
+				"actions": [
+					{
+						"type": "scrollComponent",
+						"target": "{{state.self.id}}",
+						"scrollPositionY": 99999999
+					}
+				]
+			}
+		]
+	},
+	"wgts": [
+		{
+			"type": "repeater",
+			"prps": {
+				"flows": [
+					{
+						"from": "||dataManager||",
+						"fromKey": "dataSales",
+						"toKey": "data"
+					}
+				],
+				"scps": [
+					{
+						"triggers": [
+							{
+								"event": "onStateChange",
+								"source": "||dataManager||",
+								"key": "dataSales",
+								"match": [
+									{
+										"operator": "isTruthy",
+										"key": "dataSales"
+									}
+								]
+							}
+						],
+						"actions": [
+							{
+								"type": "setState",
+								"key": "data",
+								"value": [
+									"{{eval.",
+									"  const data = [];",
+									"  const grouped = {};",
+									"  {{state.||dataManager||.dataSales}}.forEach(item => {",
+									"    if (!grouped[item.receiptNumber]) {",
+									"      grouped[item.receiptNumber] = [];",
+									"    }",
+									"    grouped[item.receiptNumber].push(item);",
+									"  });",
+									"  Object.keys(grouped).forEach(key => {",
+									"    data.push(grouped[key]);",
+									"  });",
+									"  data;",
+									"}}"
+								],
+								"inlineKeys": [
+									"value"
+								]
+							}
+						]
+					}
+				],
+				"rowMda": {
+					"type": "containerSimple",
+					"prps": {},
+					"wgts": [
+						{
+							"type": "repeater",
+							"prps": {
+								"staticData": "{{rowData}}",
+								"rowMda": {
+									"type": "containerSimple",
+									"prps": {
+										"dir": "horizontal",
+										"mainAxisAlign": "start",
+										"crossAxisAlign": "center"
+									},
+									"wgts": [
+										{
+											"type": "label",
+											"prps": {
+												"cpt": "((rowData.itemName))",
+												"fontSize": "18px",
+												"color": "darkText",
+												"width": "40%"
+											}
+										},
+										{
+											"type": "label",
+											"prps": {
+												"cpt": "@ ₱((rowData.itemPrice))",
+												"fontSize": "18px",
+												"color": "darkText",
+												"flexSize": 1,
+												"width": "20%"
+											}
+										},
+										{
+											"type": "label",
+											"prps": {
+												"cpt": "x ((rowData.itemQuantity))",
+												"fontSize": "18px",
+												"color": "darkText",
+												"flexSize": 1,
+												"width": "20%"
+											}
+										},
+										{
+											"type": "label",
+											"prps": {
+												"cpt": "= ₱((rowData.saleTotal))",
+												"fontSize": "18px",
+												"color": "darkText",
+												"flexSize": 1,
+												"width": "20%",
+												"bold": true
+											}
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "containerSimple",
+							"prps": {
+								"dir": "horizontal",
+								"mainAxisAlign": "end",
+								"crossAxisAlign": "center"
+							},
+							"wgts": [
+								{
+									"type": "label",
+									"prps": {
+										"color": "darkText",
+										"fontSize": "18px",
+										"scps": [
+											{
+												"actions": [
+													{
+														"type": "setVariable",
+														"name": "data",
+														"value": "{{rowData}}"
+													},
+													{
+														"type": "setState",
+														"key": "cpt",
+														"value": "{{eval.`Receipt ((rowData.0.receiptNumber)): ₱${ {{variable.data}}.reduce( (p, n) => p + n.saleTotal, 0)}`}}"
+													}
+												]
+											}
+										]
+									}
+								},
+								{
+									"traits": [
+										{
+											"trait": "shared/button",
+											"traitPrps": {
+												"icon": "remove",
+												"color": "teal",
+												"prpsIcon": {
+													"fontSize": "8px"
+												},
+												"fireScript": {
+													"actions": [
+														{
+															"log": true,
+															"type": "setState",
+															"target": "||dataManager||",
+															"key": "tRemoveSale",
+															"value": "{{rowData.0.receiptNumber}}"
+														}
+													]
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			}
+		}
+	]
+}

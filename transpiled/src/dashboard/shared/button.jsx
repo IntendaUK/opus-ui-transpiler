@@ -1,0 +1,148 @@
+const trait = {
+  "acceptPrps": {
+    "icon": "string",
+    "cpt": "string",
+    "fireScript": "object",
+    "prpsContainer": {
+      "type": "object",
+      "dft": {}
+    },
+    "prpsIcon": {
+      "type": "object",
+      "dft": {}
+    },
+    "color": {
+      "type": "string",
+      "dft": "blue",
+      "options": [
+        "blue",
+        "red",
+        "grey",
+        "green",
+        "orange",
+        "teal"
+      ]
+    },
+    "bgColorOptions": {
+      "internal": true,
+      "type": "object",
+      "dft": {
+        "hoverOn": {
+          "blue": "secondaryOpusBlue",
+          "red": "darkred",
+          "grey": "hsl(var(--colors-mediumGrey-hs), 40%)",
+          "green": "hsl(var(--colors-seaGreen-hs), 30%)",
+          "orange": "hsl(var(--colors-primaryOrange-hs), 45%)",
+          "teal": "secondaryTeal"
+        },
+        "hoverOff": {
+          "blue": "primaryOpusBlue",
+          "red": "red",
+          "grey": "mediumGrey",
+          "green": "hsl(var(--colors-seaGreen-hs), 35%)",
+          "orange": "primaryOrange",
+          "teal": "primaryTeal"
+        }
+      }
+    },
+    "bgHoverOff": {
+      "type": "string",
+      "morph": true,
+      "morphVariable": "res",
+      "morphActions": [
+        {
+          "type": "setVariable",
+          "name": "options",
+          "value": "$bgColorOptions.hoverOff$"
+        },
+        {
+          "type": "setVariable",
+          "name": "res",
+          "value": [
+            "{{eval.",
+            "  const options = {{variable.options}};",
+            "  options['%color%'];",
+            "}}"
+          ],
+          "inlineKeys": [
+            "value"
+          ]
+        }
+      ]
+    },
+    "bgHoverOn": {
+      "type": "string",
+      "morph": true,
+      "morphVariable": "res",
+      "morphActions": [
+        {
+          "type": "setVariable",
+          "name": "options",
+          "value": "$bgColorOptions.hoverOn$"
+        },
+        {
+          "type": "setVariable",
+          "name": "res",
+          "value": [
+            "{{eval.",
+            "  const options = {{variable.options}};",
+            "  options['%color%'];",
+            "}}"
+          ],
+          "inlineKeys": [
+            "value"
+          ]
+        }
+      ]
+    }
+  },
+  "type": "container",
+  "prps": {
+    "roundedBorders": true,
+    "hasShadow": true,
+    "margin": "4px",
+    "padding": true,
+    "paddingSize": "smallPadding",
+    "canHover": true,
+    "backgroundColor": "%bgHoverOff%",
+    "canClick": true,
+    "fireScript": "$fireScript$",
+    "gap": "smallPadding",
+    "hoverPrps": {
+      "on": {
+        "backgroundColor": "%bgHoverOn%"
+      },
+      "off": {
+        "backgroundColor": "%bgHoverOff%"
+      }
+    },
+    "spread-": "$prpsContainer$"
+  },
+  "wgts": [
+    {
+      "condition": {
+        "operator": "isTruthy",
+        "value": "$cpt$"
+      },
+      "type": "label",
+      "prps": {
+        "cpt": "%cpt%",
+        "color": "accentLight"
+      }
+    },
+    {
+      "condition": {
+        "operator": "isTruthy",
+        "value": "$icon$"
+      },
+      "type": "icon",
+      "prps": {
+        "value": "%icon%",
+        "color": "accentLight",
+        "spread-": "$prpsIcon$"
+      }
+    }
+  ]
+};
+
+export default trait;

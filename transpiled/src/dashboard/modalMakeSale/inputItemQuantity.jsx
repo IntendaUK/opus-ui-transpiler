@@ -1,0 +1,128 @@
+const trait = {
+  "acceptPrps": {},
+  "type": "containerSimple",
+  "prps": {
+    "dir": "horizontal",
+    "mainAxisAlign": "space-between",
+    "backgroundPosition": "",
+    "crossAxisAlign": "center"
+  },
+  "wgts": [
+    {
+      "type": "label",
+      "prps": {
+        "cpt": "Item Name",
+        "color": "primaryYellow",
+        "width": "40%"
+      }
+    },
+    {
+      "relId": "itemQuantity",
+      "type": "input",
+      "prps": {
+        "color": "secondaryYellow",
+        "dataType": "integer",
+        "placeholder": "Quantity Sold...",
+        "hideNumberArrows": true,
+        "width": "60%",
+        "flows": [
+          {
+            "to": "||modalMakeSale||",
+            "toKey": "itemQuantity"
+          }
+        ],
+        "scps": [
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comparison": "isTruthy",
+                    "value": "((event.shiftDown))"
+                  },
+                  {
+                    "comment": "enter",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 13
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "||modal.btnOk||",
+                "key": "clicked",
+                "value": true
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comparison": "isFalsy",
+                    "value": "((event.shiftDown))"
+                  },
+                  {
+                    "comment": "enter",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 13
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "||modal.btnAddAnother||",
+                "key": "clicked",
+                "value": true
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comment": "esc",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 27
+                  },
+                  {
+                    "operator": "isTruthy",
+                    "key": "vis"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "||modal||",
+                "key": "vis",
+                "value": false
+              },
+              {
+                "type": "setState",
+                "target": "POPUP1",
+                "key": "display",
+                "value": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+};
+
+export default trait;

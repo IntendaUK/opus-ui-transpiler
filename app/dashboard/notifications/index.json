@@ -1,0 +1,27 @@
+{
+	"acceptPrps": {},
+	"type": "container",
+	"prps": {
+		"position": "absolute",
+		"bottom": "smallPadding",
+		"right": "smallPadding",
+		"zIndex": 3,
+		"pointerEvents": "none",
+		"overflow": "hidden"
+	},
+	"wgts": [
+		{
+			"id": "NOTIFICATIONS",
+			"type": "notifications",
+			"prps": {
+				"colorBackgroundInfo": "primaryOrange",
+				"colorBackgroundWarning": "warning",
+				"colorBackgroundDanger": "error",
+				"colorBackgroundSuccess": "success",
+				"prpsLabel": {
+					"color": "primaryText"
+				}
+			}
+		}
+	]
+}

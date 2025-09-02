@@ -1,11 +1,47 @@
 {
-	"name": "@intenda/opus-ui-transpiler",
-	"version": "0.0.1",
+	"name": "transpiler",
 	"description": "",
-	"main": "index.js",
+	"version": "1.0.0",
+	"keywords": [
+		"opus-ui",
+		"example",
+		"opus"
+	],
 	"scripts": {
-		"start": "node src/index.js"
+		"start": "concurrently --kill-others \"nodemon node_modules/@intenda/opus-ui-packager/src/packager.js --includePaths=true\" \"npm run dev -- --host\"",
+		"dev": "vite --port 3000",
+		"build-json": "node node_modules/@intenda/opus-ui-packager/src/packager.js",
+		"build": "vite build"
 	},
-	"author": "",
-	"license": "ISC"
+	"dependencies": {
+		"@intenda/opus-ui": ">=2.0.0 < 3.0.0",
+		"@intenda/opus-ui-components": "^2.1.4",
+		"@intenda/opus-ui-drag-move": "^2.0.1",
+		"@intenda/opus-ui-grid": "^2.0.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"devDependencies": {
+		"@intenda/opus-ui-packager": ">=1.0.0 < 2.0.0",
+		"@intenda/vite-plugin-opus-hot-reload": ">=2.0.0 < 3.0.0",
+		"@types/react": "^19.0.12",
+		"@types/react-dom": "^19.0.4",
+		"@vitejs/plugin-react": "^4.3.4",
+		"concurrently": "^9.1.2",
+		"eslint": "^9.22.0",
+		"eslint-plugin-react": "^7.37.4",
+		"eslint-plugin-react-hooks": "^5.2.0",
+		"eslint-plugin-react-refresh": "^0.4.19",
+		"nodemon": "^3.1.9",
+		"vite": "6.2.2"
+	},
+	"nodemonConfig": {
+		"ignore": [],
+		"watch": [
+			"app"
+		],
+		"ext": "js,json,md",
+		"ignoreRoot": [],
+		"delay": 100
+	}
 }

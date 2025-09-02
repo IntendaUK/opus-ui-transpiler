@@ -1,0 +1,226 @@
+{
+	"themeConfig": {
+		"isStyleTheme": false
+	},
+	"button": {
+		"path": "button"
+	},
+	"container": {
+		"path": "container"
+	},
+	"containerSimple": {
+		"path": "containerSimple"
+	},
+	"contextMenuManager": {
+		"path": "contextMenuManager"
+	},
+	"dataLoader": {
+		"path": "dataLoader"
+	},
+	"canvas": {
+		"path": "canvas"
+	},
+	"datePicker": {
+		"path": "datePicker",
+		"propSpec": {
+			"popupBackgroundColor": {
+				"dft": "primaryWhite"
+			},
+			"popupDateColorSelected": {
+				"dft": "primaryWhite"
+			},
+			"popupDateBackgroundColorSelected": {
+				"dft": "primaryDeloitteGreen"
+			},
+			"popupTodayColor": {
+				"dft": "primaryWhite"
+			},
+			"popupTodayBackgroundColor": {
+				"dft": "primaryBlue1"
+			}
+		}
+	},
+	"focusLine": {
+		"path": "focusLine"
+	},
+	"grid": {
+		"path": "grid",
+		"propSpec": {
+			"colorCellText": {
+				"dft": "darkText"
+			},
+			"colorRowDivider": {
+				"dft": "transparent"
+			},
+			"colorRowSelectedBg": {
+				"dft": "primaryOrange"
+			},
+			"colorCellTextSelected": {
+				"dft": "lightBackground"
+			},
+			"colorRowHoverBg": {
+				"dft": "primaryOrange"
+			},
+			"colorCellTextHover": {
+				"dft": "lightBackground"
+			},
+			"colorRowBg": {
+				"dft": "lightBackground"
+			}
+		}
+	},
+	"icon": {
+		"path": "icon"
+	},
+	"image": {
+		"path": "image"
+	},
+	"input": {
+		"path": "input",
+		"propSpec": {
+			"color": {
+				"dft": "white"
+			},
+			"colorPlaceholder": {
+				"dft": "white"
+			},
+			"focusLine": {
+				"dft": false
+			},
+			"errorLine": {
+				"dft": false
+			},
+			"focusLineColor": {
+				"dft": "primary"
+			}
+		}
+	},
+	"label": {
+		"path": "label",
+		"propSpec": {
+			"userSelect": {
+				"dft": "text"
+			},
+			"color": {
+				"dft": "primaryText"
+			}
+		}
+	},
+	"localStorageManager": {
+		"path": "localStorageManager"
+	},
+	"markdownLabel": {
+		"path": "markdownLabel",
+		"propSpec": {
+			"allowScriptAnchors": {
+				"dft": true
+			},
+			"allowAnchorAttributes": {
+				"dft": true
+			},
+			"overrideStyles": {
+				"link": {}
+			},
+			"style": {
+				"dft": {
+					".cpnMarkdownLabel": {
+						"*": {
+							"color": "white",
+							"user-select": "text"
+						},
+						"h1": {
+							"font-size": "42px",
+							"font-weight": "700",
+							"color": "var(--colors-footerText)"
+						},
+						"h2": {
+							"font-weight": "700",
+							"color": "var(--colors-footerText)",
+							"margin": "1.5rem 0px",
+							"line-height": "2.5rem"
+						},
+						"p": {
+							"font-size": "17px",
+							"line-height": "30px",
+							"color": "var(--colors-footerText)",
+							"margin": "1rem 0px",
+							"strong": {
+								"font-size": "17px"
+							}
+						},
+						"p a": {
+							"font-size": "17px",
+							"line-height": "30px",
+							"color": "var(--colors-primaryOpusBlue)",
+							"margin": "1rem 0px"
+						},
+						"ul, ol": {
+							"margin": "18px 0px"
+						},
+						"ul li, ol li": {
+							"font-size": "17px",
+							"line-height": "22px",
+							"color": "var(--colors-footerText)",
+							"margin": "1rem 0px"
+						}
+					}
+				}
+			}
+		}
+	},
+	"modal": {
+		"path": "modal"
+	},
+	"notifications": {
+		"path": "notifications"
+	},
+	"popup": {
+		"path": "popup",
+		"propSpec": {}
+	},
+	"radio": {
+		"path": "radio"
+	},
+	"repeater": {
+		"path": "repeater"
+	},
+	"scriptRunner": {
+		"path": "scriptRunner"
+	},
+	"systemModal": {
+		"path": "systemModal"
+	},
+	"timePicker": {
+		"path": "timePicker"
+	},
+	"viewport": {
+		"path": "viewport"
+	},
+	"zoomPanner": {
+		"path": "zoomPanner"
+	},
+	"containerMovable": {
+		"path": "containerMovable"
+	},
+	"checkbox": {
+		"path": "checkbox"
+	},
+	"upload": {
+		"path": "upload"
+	},
+	"treeview": {
+		"path": "treeview"
+	},
+	"containerDnd": {
+		"path": "containerDnd"
+	},
+	"dragger": {
+		"path": "dragger"
+	},
+	"codeEditor": {
+		"path": "codeEditor"
+	},
+	"pdfViewer": {
+		"path": "pdfViewer"
+	}
+}

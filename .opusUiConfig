@@ -1,0 +1,16 @@
+{
+    "opusPackagerConfig": {
+        "appDir": "app",
+        "packagedDir": "public",
+        "packagedFileName": "app"
+    },
+    "opusUiComponentLibraries": [
+        "@intenda/opus-ui-components",
+        "@intenda/opus-ui-drag-move",
+        "@intenda/opus-ui-grid"
+    ],
+    "opusUiEnsembles": [],
+    "opusUiColorThemes": [
+        "colors"
+    ]
+}

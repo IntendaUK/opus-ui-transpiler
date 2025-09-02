@@ -1,0 +1,302 @@
+{
+	"type": "containerSimple",
+	"prps": {
+		"vis": false,
+		"dataItems": [],
+		"dataSales": [],
+		"tPersistItems": null,
+		"tPersistSales": null,
+		"tCaptureItem": null,
+		"tCaptureSale": null,
+		"tRemoveItem": null,
+		"tRemoveSale": null,
+		"totalSales": 0,
+		"nextReceipt": 1,
+		"scps": [
+			{
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "dataSales",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "dataSales"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setState",
+						"key": "totalSales",
+						"value": [
+							"{{eval.",
+							"  const res = {{state.self.dataSales}}.reduce( (p, n) => p + (n.itemQuantity * n.itemPrice), 0);",
+							"  res;",
+							"}}"
+						],
+						"inlineKeys": [
+							"value"
+						]
+					}
+				]
+			},
+			{
+				"actions": [
+					{
+						"type": "setState",
+						"key": "dataItems",
+						"value": [
+							"{{eval.",
+							"  const itemPricesString = localStorage.getItem('itemPrices');",
+							"  const itemPrices = itemPricesString ? JSON.parse(itemPricesString) : [];",
+							"  itemPrices;",
+							"}}"
+						],
+						"inlineKeys": [
+							"value"
+						]
+					}
+				]
+			},
+			{
+				"id": "sGS",
+				"actions": [
+					{
+						"log": true,
+						"type": "setMultiState",
+						"value": {
+							"dataSales": [
+								"{{sGS.eval.",
+								"  const itemSalesString = localStorage.getItem('itemSales');",
+								"  const itemSales = itemSalesString ? JSON.parse(itemSalesString) : [];",
+								"  itemSales;",
+								"}}"
+							],
+							"nextReceipt": [
+								"{{sGS.eval.",
+								"  const itemSalesString = localStorage.getItem('itemSales');",
+								"  const itemSales = itemSalesString ? JSON.parse(itemSalesString) : [{ receiptNumber: 0 }];",
+								"  Math.max(...itemSales.map(s => s.receiptNumber) ) + 1;",
+								"}}"
+							],
+							"inlineKeys": [
+								"dataSales",
+								"nextReceipt"
+							]
+						}
+					}
+				]
+			},
+			{
+				"id": "sPI",
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "tPersistItems",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "tPersistItems"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setMultiState",
+						"value": {
+							"tPersistItems": null,
+							"temp": [
+								"{{sPI.eval.",
+								"  const itemPricesToSave = {{sPI.state.self.dataItems}};",
+								"  localStorage.setItem('itemPrices', JSON.stringify(itemPricesToSave));",
+								"}}"
+							],
+							"inlineKeys": [
+								"temp"
+							]
+						}
+					}
+				]
+			},
+			{
+				"id": "sPI",
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "tPersistSales",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "tPersistSales"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setMultiState",
+						"value": {
+							"tPersistSales": null,
+							"temp": [
+								"{{sPI.eval.",
+								"  const itemSalesToSave = {{sPI.state.self.dataSales}};",
+								"  localStorage.setItem('itemSales', JSON.stringify(itemSalesToSave));",
+								"}}"
+							],
+							"inlineKeys": [
+								"temp"
+							]
+						}
+					}
+				]
+			},
+			{
+				"id": "sCI",
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "tCaptureItem",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "tCaptureItem"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setMultiState",
+						"value": {
+							"tCaptureItem": null,
+							"tPersistItems": true,
+							"dataItems": [
+								"{{sCI.eval.",
+								"  const dataItems = [...{{sCI.state.self.dataItems}}];",
+								"  const captureItem = {{sCI.state.self.tCaptureItem}};",
+								"  captureItem.itemPrice = +captureItem.itemPrice;",
+								"  dataItems.push(captureItem);",
+								"  dataItems;",
+								"}}"
+							],
+							"inlineKeys": [
+								"dataItems"
+							]
+						}
+					}
+				]
+			},
+			{
+				"id": "sCI",
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "tCaptureSale",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "tCaptureSale"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setMultiState",
+						"value": {
+							"tCaptureSale": null,
+							"tPersistSales": true,
+							"dataSales": [
+								"{{sCI.eval.",
+								"  const dataSales = [...{{sCI.state.self.dataSales}}];",
+								"  const captureSale = {{sCI.state.self.tCaptureSale}};",
+								"  captureSale.itemQuantity = +captureSale.itemQuantity;",
+								"  captureSale.itemPrice = +captureSale.itemPrice;",
+								"  captureSale.saleTotal = captureSale.itemQuantity * captureSale.itemPrice;",
+								"  dataSales.push(captureSale);",
+								"  dataSales;",
+								"}}"
+							],
+							"inlineKeys": [
+								"dataSales"
+							]
+						}
+					}
+				]
+			},
+			{
+				"id": "sCI",
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "tRemoveItem",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "tRemoveItem"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setMultiState",
+						"value": {
+							"tRemoveItem": null,
+							"tPersistItems": true,
+							"dataItems": [
+								"{{sCI.eval.",
+								"  const dataItems = [...{{sCI.state.self.dataItems}}];",
+								"  const removeItem = {{sCI.state.self.tRemoveItem}};",
+								"  dataItems.splice(removeItem, 1);",
+								"  dataItems;",
+								"}}"
+							],
+							"inlineKeys": [
+								"dataItems"
+							]
+						}
+					}
+				]
+			},
+			{
+				"id": "sCI",
+				"triggers": [
+					{
+						"event": "onStateChange",
+						"key": "tRemoveSale",
+						"match": [
+							{
+								"operator": "isTruthy",
+								"key": "tRemoveSale"
+							}
+						]
+					}
+				],
+				"actions": [
+					{
+						"type": "setMultiState",
+						"value": {
+							"tRemoveSale": null,
+							"tPersistSales": true,
+							"dataSales": [
+								"{{sCI.eval.",
+								"  const dataSales = [...{{sCI.state.self.dataSales}}];",
+								"  const removeSale = {{sCI.state.self.tRemoveSale}};",
+								"  dataSales.spliceWhere(s => s.receiptNumber === removeSale);",
+								"  dataSales;",
+								"}}"
+							],
+							"inlineKeys": [
+								"dataSales"
+							]
+						}
+					}
+				]
+			}
+		]
+	}
+}

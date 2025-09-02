@@ -1,0 +1,226 @@
+const trait = {
+  "acceptPrps": {},
+  "type": "containerSimple",
+  "prps": {
+    "dir": "horizontal",
+    "mainAxisAlign": "space-between",
+    "backgroundPosition": "",
+    "crossAxisAlign": "center",
+    "marginTop": "12px"
+  },
+  "wgts": [
+    {
+      "type": "label",
+      "prps": {
+        "cpt": "Item Name",
+        "color": "primaryYellow",
+        "width": "40%"
+      }
+    },
+    {
+      "relId": "itemName",
+      "type": "input",
+      "prps": {
+        "color": "secondaryYellow",
+        "placeholder": "Choose an item...",
+        "width": "60%",
+        "open": "POPUP1",
+        "autoDropdown": true,
+        "selectedIndex": 0,
+        "forceFocus": true,
+        "scps": [
+          {
+            "actions": [
+              {
+                "type": "setState",
+                "key": "triggerOpenLookup",
+                "value": true
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onStateChange"
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "||modal.itemQuantity||",
+                "key": "forceFocus",
+                "value": true
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onMount",
+                "source": "POPUP1-((state.self.id))"
+              },
+              {
+                "event": "onStateChange",
+                "key": "selectedIndex"
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "POPUP1-((state.self.id))",
+                "key": "hoveredRow",
+                "value": "{{state.self.selectedIndex}}"
+              },
+              {
+                "type": "setVariable",
+                "name": "temp",
+                "value": "{{eval.document.getElementById('POPUP1-((state.self.id))').querySelector(`.column .cell:nth-child( ${((state.self.selectedIndex)) + 1} )`).scrollIntoView() }}"
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comment": "down arrow",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 40
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "key": "selectedIndex",
+                "value": "{{eval.Math.min( ((state.self.lookupData.length)) - 1, {{state.self.selectedIndex}} + 1)}}"
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comment": "up arrow",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 38
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "key": "selectedIndex",
+                "value": "{{eval.Math.max( 0, {{state.self.selectedIndex}} - 1)}}"
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comment": "enter",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 13
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "value": "{{state.POPUP1-((state.self.id)).data.((state.self.selectedIndex)).itemName}}"
+              },
+              {
+                "type": "setState",
+                "target": "||modalMakeSale||",
+                "key": "itemPrice",
+                "value": "{{state.POPUP1-((state.self.id)).data.((state.self.selectedIndex)).itemPrice}}"
+              },
+              {
+                "type": "setState",
+                "target": "POPUP1",
+                "key": "display",
+                "value": false
+              }
+            ]
+          },
+          {
+            "triggers": [
+              {
+                "event": "onKeyDown",
+                "match": [
+                  {
+                    "comment": "esc",
+                    "operator": "isEqual",
+                    "value": "((event.keyCode))",
+                    "compareValue": 27
+                  },
+                  {
+                    "operator": "isTruthy",
+                    "key": "vis"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "||modal||",
+                "key": "vis",
+                "value": false
+              },
+              {
+                "type": "setState",
+                "target": "POPUP1",
+                "key": "display",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "lookupWgts": [
+          {
+            "id": "itemName"
+          }
+        ],
+        "flows": [
+          {
+            "from": "||dataManager||",
+            "fromKey": "dataItems",
+            "toKey": "lookupData"
+          },
+          {
+            "to": "||modalMakeSale||",
+            "toKey": "itemName"
+          }
+        ],
+        "lookupFlows": [
+          {
+            "fromSubKey": "itemName"
+          },
+          {
+            "fromSubKey": "itemPrice",
+            "to": "||modalMakeSale||",
+            "toKey": "itemPrice"
+          }
+        ],
+        "prpsDropdownIcon": {
+          "color": "secondaryYellow"
+        }
+      }
+    }
+  ]
+};
+
+export default trait;

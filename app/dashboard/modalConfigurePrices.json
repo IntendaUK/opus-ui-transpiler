@@ -1,0 +1,168 @@
+{
+	"acceptPrps": {},
+	"type": "containerSimple",
+	"prps": {
+		"singlePage": true
+	},
+	"traits": [
+		{
+			"trait": "shared/modal",
+			"traitPrps": {
+				"prpsContainer": {
+					"gap": "24px"
+				},
+				"wgts": [
+					{
+						"type": "label",
+						"prps": {
+							"color": "accentLight",
+							"cpt": "Configure Item Prices",
+							"fontSize": "36px"
+						}
+					},
+					{
+						"traits": [
+							{
+								"trait": "shared/button",
+								"traitPrps": {
+									"icon": "add",
+									"color": "orange",
+									"prpsContainer": {
+										"dir": "horizontal"
+									},
+									"fireScript": {
+										"actions": [
+											{
+												"type": "setState",
+												"target": "||modalCapturePrice||",
+												"key": "vis",
+												"value": true
+											}
+										]
+									}
+								}
+							}
+						],
+						"prps": {
+							"position": "absolute",
+							"right": "0px",
+							"top": "0px"
+						}
+					},
+					{
+						"type": "containerSimple",
+						"prps": {
+							"flex": true,
+							"marginTop": "36px"
+						},
+						"wgts": [
+							{
+								"type": "repeater",
+								"prps": {
+									"flows": [
+										{
+											"from": "||dataManager||",
+											"fromKey": "dataItems",
+											"toKey": "data"
+										}
+									],
+									"rowMda": {
+										"type": "containerSimple",
+										"prps": {
+											"dir": "horizontal",
+											"mainAxisAlign": "start",
+											"crossAxisAlign": "center",
+											"gap": "12px"
+										},
+										"wgts": [
+											{
+												"traits": [
+													{
+														"trait": "shared/button",
+														"traitPrps": {
+															"icon": "remove",
+															"color": "teal",
+															"prpsIcon": {
+																"fontSize": "8px"
+															},
+															"fireScript": {
+																"actions": [
+																	{
+																		"type": "setState",
+																		"target": "||dataManager||",
+																		"key": "tRemoveItem",
+																		"value": "((rowNumber))"
+																	}
+																]
+															}
+														}
+													}
+												]
+											},
+											{
+												"type": "label",
+												"prps": {
+													"cpt": "((rowData.itemName))",
+													"fontSize": "18px",
+													"color": "accentLight",
+													"width": "40%",
+													"marginLeft": "12px"
+												}
+											},
+											{
+												"type": "label",
+												"prps": {
+													"cpt": "₱((rowData.itemPrice))",
+													"fontSize": "18px",
+													"color": "accentLight",
+													"flexSize": 1
+												}
+											}
+										]
+									}
+								}
+							}
+						]
+					},
+					{
+						"type": "containerSimple",
+						"prps": {
+							"dir": "horizontal",
+							"mainAxisAlign": "end",
+							"crossAxisAlign": "center",
+							"marginTop": "36px",
+							"width": "100%"
+						},
+						"wgts": [
+							{
+								"traits": [
+									{
+										"trait": "shared/button",
+										"traitPrps": {
+											"icon": "save",
+											"cpt": "Ok",
+											"color": "orange",
+											"prpsContainer": {
+												"dir": "horizontal"
+											},
+											"fireScript": {
+												"actions": [
+													{
+														"type": "setState",
+														"target": "||modal||",
+														"key": "vis",
+														"value": false
+													}
+												]
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	]
+}
