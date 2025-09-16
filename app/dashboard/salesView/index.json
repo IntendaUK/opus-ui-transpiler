@@ -158,6 +158,7 @@
 											{
 												"actions": [
 													{
+														"log": true,
 														"type": "setVariable",
 														"name": "data",
 														"value": "{{rowData}}"

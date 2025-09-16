@@ -1,0 +1,5277 @@
+[
+  {
+    "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasPedigree/pedigreeToolbar/index.json/wgts/0/traits/0/traitPrps",
+    "component": {
+      "scope": "pedigreeTab",
+      "height": "{theme.global.fontSize}",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/index.json/wgts/0/wgts/0",
+    "component": {
+      "type": "containerSimple",
+      "prps": {
+        "vis": false,
+        "flows": [
+          {
+            "from": "%tabId%-unionObjectBuilder",
+            "fromKey": "DOData",
+            "fromSubKey": "dataObject",
+            "toKey": "vis",
+            "mapFunctionString": "({ hed_cde }) => hed_cde !== null"
+          }
+        ],
+        "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/index.json"
+      },
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/canvasToolbar/index",
+          "traitPrps": {
+            "objectBuilderId": "%tabId%-unionObjectBuilder"
+          },
+          "def": {
+            "acceptPrps": {
+              "objectBuilderId": "string"
+            },
+            "scope": "canvasToolbar",
+            "type": "containerSimple",
+            "prps": {
+              "dir": "horizontal",
+              "gap": "smallPadding",
+              "padding": true,
+              "paddingSize": "tinyPadding smallPadding",
+              "crossAxisAlign": "center",
+              "position": "absolute",
+              "top": "0px",
+              "right": "0px",
+              "zIndex": 5,
+              "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/canvasToolbar/index.json"
+            },
+            "wgts": [
+              {
+                "traits": [
+                  "@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/shared/viewModeDropdown/index"
+                ],
+                "prps": {
+                  "marginRight": "auto",
+                  "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/canvasToolbar/index.json"
+                }
+              },
+              {
+                "id": "%objectBuilderId%-unionTypeDropdown",
+                "traits": [
+                  "@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/canvasToolbar/dropdownUnionType/index"
+                ],
+                "prps": {
+                  "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasUnion/canvasToolbar/index.json"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/index.json/wgts/0/wgts/0",
+    "component": {
+      "type": "containerSimple",
+      "prps": {
+        "vis": false,
+        "flows": [
+          {
+            "from": "%tabId%-objectBuilder",
+            "fromKey": "DOData",
+            "fromSubKey": "dataObject",
+            "toKey": "vis",
+            "mapFunctionString": "({ hed_cde }) => hed_cde !== null"
+          }
+        ],
+        "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/index.json"
+      },
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/canvasToolbar/index",
+          "def": {
+            "acceptPrps": {},
+            "scope": "canvasToolbar",
+            "type": "containerSimple",
+            "prps": {
+              "dir": "horizontal",
+              "gap": "smallPadding",
+              "padding": true,
+              "paddingSize": "tinyPadding smallPadding",
+              "crossAxisAlign": "center",
+              "position": "absolute",
+              "top": "0px",
+              "right": "0px",
+              "zIndex": 5,
+              "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/canvasToolbar/index.json"
+            },
+            "wgts": [
+              {
+                "traits": [
+                  "@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/shared/viewModeDropdown/index"
+                ],
+                "prps": {
+                  "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/canvasToolbar/index.json"
+                }
+              },
+              {
+                "traits": [
+                  "@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/shared/aggregationDropdown/index"
+                ],
+                "prps": {
+                  "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/canvasToolbar/index.json"
+                }
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_inputs/formCheckbox/index",
+                    "traitPrps": {
+                      "label": "Smart Paths"
+                    }
+                  }
+                ],
+                "prps": {
+                  "value": true,
+                  "marginRight": "auto",
+                  "flows": [
+                    {
+                      "from": "||objectBuilder||",
+                      "fromKey": "smartPathsEnabled"
+                    }
+                  ],
+                  "scps": [
+                    {
+                      "id": "sSP",
+                      "triggers": [
+                        {
+                          "event": "onStateChange"
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": "stopScript",
+                          "condition": {
+                            "operator": "isEqual",
+                            "value": "{{sSP.state.||objectBuilder||.smartPathsEnabled}}",
+                            "compareValue": "{{sSP.state.self.value}}"
+                          }
+                        },
+                        {
+                          "type": "setMultiState",
+                          "target": "||objectBuilder||",
+                          "value": {
+                            "smartPathsEnabled": "{{sSP.state.self.value}}",
+                            "eRenderLinks": true
+                          },
+                          "setLocalStorage": "{{eval.   localStorage.setItem('smartPathsEnabled', {{state.self.value}}); }}"
+                        }
+                      ]
+                    }
+                  ],
+                  "canHover": true,
+                  "tooltipZIndex": 10005,
+                  "tooltipMda": {
+                    "position": "top",
+                    "type": "containerSimple",
+                    "prps": {
+                      "width": "max-content",
+                      "bottom": "10px",
+                      "backgroundColor": "secondary",
+                      "padding": true,
+                      "paddingSize": "tinyPadding",
+                      "roundedBorders": true,
+                      "pointerEvents": "none"
+                    },
+                    "wgts": [
+                      {
+                        "type": "markdownLabel",
+                        "prps": {
+                          "color": "iconPrimary",
+                          "fontSize": "fontSizeMedium",
+                          "cpt": "Smart paths cause links to be drawn around headers\n\nat the cost of slightly lower performance",
+                          "userSelect": "none",
+                          "textAlign": "center",
+                          "textAlignLast": "center",
+                          "style": {
+                            ".cpnMarkdownLabel": {
+                              "p": {
+                                "margin": "0px"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/canvasToolbar/index.json"
+                }
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_inputs/formCheckbox/index",
+                    "traitPrps": {
+                      "label": "Push"
+                    }
+                  }
+                ],
+                "prps": {
+                  "value": true,
+                  "marginRight": "auto",
+                  "flows": [
+                    {
+                      "from": "||objectBuilder||",
+                      "fromKey": "OBMode",
+                      "toKey": "enabled",
+                      "mapFunctionString": "v => v !== 'View'"
+                    }
+                  ],
+                  "scps": [
+                    {
+                      "id": "sSP",
+                      "triggers": [
+                        {
+                          "event": "onStateChange"
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": "stopScript",
+                          "condition": {
+                            "operator": "isEqual",
+                            "value": "{{sSP.state.||objectBuilder||.DOData.dataObject.push}}",
+                            "compareValue": "{{sSP.state.self.value}}"
+                          }
+                        },
+                        {
+                          "type": "setState",
+                          "target": "||objectBuilder||",
+                          "key": "eSetDOState",
+                          "value": {
+                            "DOStateKey": "pushStatus",
+                            "DOStateValue": "{{sSP.state.self.value}}"
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "path": "dashboard/@l2_dashboards/l2_canvas_shared/canvas/tabManager/tabContents/canvasView/canvasToolbar/index.json"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_connectors/dataConnectionConfiguration/container/tabContainer/propertiesTab/form/index.json/wgts/0",
+    "component": {
+      "relId": "dba_typ",
+      "trait": "@l2_inputs/formInput/index",
+      "traitPrps": {
+        "label": "Data Source Type",
+        "prpsInput": {
+          "mandatory": true,
+          "maxLength": 50,
+          "regex": "^[a-zA-Z0-9_]*$",
+          "errorOverrides": {
+            "regex": "Code contains special characters."
+          },
+          "flows": [
+            {
+              "from": "||dataConnectors.dataConnectionConfiguration||",
+              "fromKey": "record",
+              "fromSubKey": "dba_typ",
+              "toKey": "enabled",
+              "mapFunctionString": "v => !v.length"
+            },
+            {
+              "from": "||dataConnectors.dataConnectionConfiguration||",
+              "fromKey": "record",
+              "fromSubKey": "dba_typ",
+              "toKey": "value"
+            },
+            {
+              "to": "||dataConnectors.dataConnectionConfiguration||",
+              "toKey": "modifiedRecord",
+              "toSubKey": "dba_typ"
+            }
+          ]
+        }
+      },
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_connectors/dataConnectionConfiguration/container/tabContainer/propertiesTab/form/index.json/wgts/1",
+    "component": {
+      "relId": "dba_typ_des",
+      "trait": "@l2_inputs/formInput/index",
+      "traitPrps": {
+        "label": "Description",
+        "prpsInput": {
+          "mandatory": true,
+          "maxLength": 100,
+          "multiline": true,
+          "flows": [
+            {
+              "from": "||dataConnectors.dataConnectionConfiguration||",
+              "fromKey": "record",
+              "fromSubKey": "dba_typ_des",
+              "toKey": "value"
+            },
+            {
+              "to": "||dataConnectors.dataConnectionConfiguration||",
+              "toKey": "modifiedRecord",
+              "toSubKey": "dba_typ_des"
+            }
+          ]
+        }
+      },
+      "prps": {
+        "marginTop": "smallPadding",
+        "path": "dashboard/@l2_dashboards/l2_data_connectors/dataConnectionConfiguration/container/tabContainer/propertiesTab/form/index.json"
+      },
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_import/importDataObjectReportPanel/container/uploadReportGrid/index.json/wgts/0",
+    "component": {
+      "relId": "grid",
+      "trait": "@l2_grid/index",
+      "traitPrps": {
+        "gridId": "uploadReportsGrid",
+        "traitDataManager": "@l2_dashboards/l2_data_import/importDataObjectReportPanel/container/uploadReportGrid/functional/dataManager/index",
+        "hasToolbar": true,
+        "pageSize": 10,
+        "canResizeColumns": true,
+        "columnConfig": [
+          {
+            "enabled": false,
+            "canFilter": false,
+            "canSort": false,
+            "key": "fil_nme",
+            "name": "File Name",
+            "type": "string",
+            "default": "",
+            "columnMinWidth": "200px"
+          },
+          {
+            "canFilter": false,
+            "canSort": false,
+            "enabled": false,
+            "key": "stt_cde",
+            "name": "File Status",
+            "type": "string",
+            "default": "",
+            "columnMinWidth": "200px"
+          },
+          {
+            "enabled": false,
+            "canFilter": false,
+            "canSort": false,
+            "key": "imp_hed_cde",
+            "name": "Data Object Code",
+            "type": "string",
+            "default": "",
+            "columnMinWidth": "200px"
+          },
+          {
+            "enabled": false,
+            "canFilter": false,
+            "canSort": false,
+            "key": "hed_vrs",
+            "name": "Version",
+            "type": "string",
+            "default": "",
+            "columnMinWidth": "120px"
+          },
+          {
+            "enabled": false,
+            "canFilter": false,
+            "canSort": false,
+            "key": "prc_dte",
+            "name": "Completed",
+            "type": "string",
+            "default": "",
+            "columnMinWidth": "150px"
+          },
+          {
+            "isAction": true,
+            "canFilter": false,
+            "key": "result",
+            "name": "Result",
+            "columnMinWidth": "85px",
+            "align": "center",
+            "headerTraits": [
+              {
+                "trait": "@l2_grid/visual/headerCells/visual/actionHeaderCell/default/index",
+                "traitPrps": {
+                  "title": "Result"
+                }
+              }
+            ],
+            "traits": [
+              {
+                "trait": "@l2_dashboards/l2_data_import/importDataObjectReportPanel/container/uploadReportGrid/resultCell",
+                "traitPrps": {}
+              }
+            ]
+          },
+          {
+            "enabled": false,
+            "canFilter": false,
+            "canSort": false,
+            "key": "imp_hed_cot",
+            "name": "Comment",
+            "type": "string",
+            "default": "",
+            "columnMinWidth": "200px"
+          }
+        ]
+      },
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index.json",
+    "component": {
+      "acceptPrps": {
+        "rowData": "object"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Preview",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/l2_data_pedigree/objectLibrary/functional/contextMenu/actions/runDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Copy Name",
+                      "icon": "content_paste"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "operator": "isEqual",
+                      "value": "$rowData.tab_type$",
+                      "compareValue": "Table"
+                    },
+                    "trait": "@l2_dashboards/l2_object_builder/objectLibrary/functional/contextMenu/actions/copyMenuItemLabel",
+                    "traitPrps": {
+                      "copyValue": "$rowData.hed_cde$"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "operator": "isNotEqual",
+                      "value": "$rowData.tab_type$",
+                      "compareValue": "Table"
+                    },
+                    "trait": "@l2_dashboards/l2_object_builder/objectLibrary/functional/contextMenu/actions/copyMenuItemLabel",
+                    "traitPrps": {
+                      "copyValue": "$rowData.hed_nme$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "More Info",
+                      "icon": "info"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/l2_data_pedigree/objectLibrary/functional/contextMenu/actions/moreInfo",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "condition": {
+                      "operator": "isNotEqual",
+                      "value": "%rowData.tab_type%",
+                      "compareValue": "Table"
+                    },
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Inspect Lineage",
+                      "icon": "account_tree"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "operator": "isEqual",
+                      "value": "%rowData.tab_type%",
+                      "compareValue": "Table"
+                    },
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Inspect Dependencies",
+                      "icon": "account_tree"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setState",
+                        "target": "||canvasTabManager||",
+                        "key": "eCreateTab",
+                        "value": {
+                          "tabType": "Pedigree",
+                          "dataObject": "$rowData$",
+                          "openOnCreate": true
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/contextMenu/dataPedigree/index.json",
+    "component": {
+      "acceptPrps": {
+        "nodeData": "object"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setState",
+                        "target": "||canvasTabManager||",
+                        "key": "eCreateTab",
+                        "value": {
+                          "tabType": "Pedigree",
+                          "dataObject": "$nodeData$"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "traits": [
+                  {
+                    "condition": {
+                      "operator": "isNotEqual",
+                      "value": "%nodeData.tab_type%",
+                      "compareValue": "Table"
+                    },
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Inspect Lineage",
+                      "icon": "account_tree"
+                    }
+                  },
+                  {
+                    "condition": {
+                      "operator": "isEqual",
+                      "value": "%nodeData.tab_type%",
+                      "compareValue": "Table"
+                    },
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Inspect Dependencies",
+                      "icon": "account_tree"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/contextMenu/dataPedigree/index.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json",
+    "component": {
+      "acceptPrps": {
+        "nodeHeaderId": "string",
+        "nodeIcon": "string",
+        "nodeData": "object",
+        "nodeLabel": {
+          "morph": true,
+          "morphVariable": "result",
+          "morphActions": [
+            {
+              "type": "applyComparison",
+              "operator": "some",
+              "comparisons": [
+                {
+                  "operator": "isEqual",
+                  "value": "%nodeData.tab_type%",
+                  "compareValue": "View"
+                },
+                {
+                  "operator": "isEqual",
+                  "value": "%nodeData.tab_type%",
+                  "compareValue": "Union"
+                }
+              ],
+              "branch": {
+                "true": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "%nodeData.hed_nme%"
+                  }
+                ],
+                "false": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "%nodeData.hed_cde%"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "backgroundColor": "string",
+        "backgroundColorWithCache": {
+          "morph": true,
+          "morphVariable": "result",
+          "morphActions": [
+            {
+              "type": "applyComparison",
+              "operator": "isTruthy",
+              "value": "$nodeData.dev_viw_cde$",
+              "branch": {
+                "true": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "primary"
+                  }
+                ],
+                "false": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "%backgroundColor%"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "fieldWgts": "array",
+        "filterId": "string",
+        "rootObjectBorder": {
+          "morph": true,
+          "morphVariable": "result",
+          "morphActions": [
+            {
+              "type": "applyComparison",
+              "operator": "isTruthy",
+              "value": "$nodeData.isRootObject$",
+              "branch": {
+                "true": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "2px solid var(--colors-fluorescentBlue)"
+                  }
+                ],
+                "false": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "unset"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "scope": "pedigreeHeader",
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/index",
+          "traitPrps": {
+            "nodeData": "$nodeData$"
+          },
+          "def": {
+            "acceptPrps": {
+              "nodeData": "object"
+            },
+            "traits": [
+              {
+                "condition": {
+                  "operator": "all",
+                  "^comparisons": [
+                    {
+                      "operator": "isTruthy",
+                      "value": "{{state.||objectBuilder||.vis}}"
+                    },
+                    {
+                      "operator": "isFalsy",
+                      "value": "{{state.||dataPedigree||.isModalContent}}"
+                    }
+                  ]
+                },
+                "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/dataObject/index",
+                "traitPrps": {
+                  "nodeData": "$nodeData$"
+                }
+              },
+              {
+                "condition": {
+                  "operator": "all",
+                  "^comparisons": [
+                    {
+                      "operator": "isEqual",
+                      "value": "((state.||sidebar||.selectedDashboard))",
+                      "compareValue": "@l2_dashboards/l2_data_pedigree/index"
+                    },
+                    {
+                      "operator": "isFalsy",
+                      "value": "{{state.||dataPedigree||.isModalContent}}"
+                    }
+                  ]
+                },
+                "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/dataPedigree/index",
+                "traitPrps": {
+                  "nodeData": "$nodeData$"
+                }
+              },
+              {
+                "condition": {
+                  "operator": "isTruthy",
+                  "value": "{{state.||dataPedigree||.isModalContent}}"
+                },
+                "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/DORequestToPublishPanel/index",
+                "traitPrps": {
+                  "nodeData": "$nodeData$"
+                }
+              }
+            ],
+            "prps": {
+              "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/contextMenu/index.json"
+            }
+          }
+        }
+      ],
+      "type": "container",
+      "prps": {
+        "border": "%rootObjectBorder%",
+        "backgroundColor": "%backgroundColorWithCache%",
+        "defaultColor": "%backgroundColor%",
+        "backfaceVisibility": "hidden",
+        "shadow": "0px 0px 4px 1px rgba(0,0,0,0.14)",
+        "marginTop": "4px",
+        "marginBottom": "4px",
+        "marginRight": "4px",
+        "style": {
+          ".cpnContainer": {
+            "&:first-child": {
+              "margin-left": "4px"
+            }
+          }
+        },
+        "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+      },
+      "wgts": [
+        {
+          "type": "containerSimple",
+          "prps": {
+            "width": "285px",
+            "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+          },
+          "wgts": [
+            {
+              "type": "container",
+              "traits": [
+                {
+                  "trait": "@l2_util/functional/showFullTextOnHoverWithDelay",
+                  "traitPrps": {
+                    "id": "%nodeData.filterId%",
+                    "value": "%nodeLabel%"
+                  }
+                }
+              ],
+              "prps": {
+                "dir": "horizontal",
+                "padding": true,
+                "paddingSize": "tinyPadding smallPadding",
+                "crossAxisAlign": "center",
+                "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+              },
+              "wgts": [
+                {
+                  "type": "icon",
+                  "prps": {
+                    "color": "iconPrimary",
+                    "value": "%nodeIcon%",
+                    "marginRight": "{theme.global.smallPadding}",
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+                  }
+                },
+                {
+                  "type": "container",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$nodeData.pub_aft_cre$"
+                  },
+                  "traits": [
+                    "@l2_dashboards/l2_data_pedigree/header/functional/showMetadataOnClick"
+                  ],
+                  "prps": {
+                    "zIndex": 2,
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+                  },
+                  "wgts": [
+                    {
+                      "type": "icon",
+                      "prps": {
+                        "color": "error",
+                        "value": "error",
+                        "marginRight": "{theme.global.smallPadding}",
+                        "backgroundColor": "iconPrimary",
+                        "borderRadius": "50%",
+                        "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "label",
+                  "prps": {
+                    "labelType": "h3",
+                    "bold": true,
+                    "color": "iconPrimary",
+                    "cpt": "%nodeLabel%",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap",
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+                  }
+                },
+                {
+                  "type": "button",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$nodeData.is_aggregate$"
+                  },
+                  "prps": {
+                    "zIndex": 2,
+                    "marginLeft": "{theme.global.smallPadding}",
+                    "prpsIcon": {
+                      "value": "stacked_bar_chart",
+                      "color": "iconPrimary"
+                    },
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+                  }
+                },
+                {
+                  "id": "%nodeData.filterId%",
+                  "type": "button",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$nodeData.filters$"
+                  },
+                  "prps": {
+                    "zIndex": 2,
+                    "marginLeft": "{theme.global.smallPadding}",
+                    "prpsIcon": {
+                      "value": "filter_alt",
+                      "color": "iconPrimary"
+                    },
+                    "fireScript": {
+                      "actions": [
+                        {
+                          "type": "setState",
+                          "target": "||dataPedigree||",
+                          "key": "eToggleFilterBox",
+                          "value": {
+                            "headerId": "%nodeHeaderId%",
+                            "headerData": "$nodeData$"
+                          }
+                        }
+                      ]
+                    },
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "containerSimple",
+              "prps": {
+                "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/index.json"
+              },
+              "wgts": "$fieldWgts$"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_pedigree/index.json/wgts/0",
+    "component": {
+      "id": "dataPedigree-objectLibrary",
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_data_pedigree/objectLibrary/index",
+          "def": {
+            "acceptPrps": {},
+            "prps": {
+              "marginRight": "tinyPadding",
+              "path": "dashboard/@l2_dashboards/l2_data_pedigree/objectLibrary/index.json"
+            },
+            "traits": [
+              {
+                "trait": "@l2_dashboards/l2_canvas_shared/objectLibrary/index",
+                "traitPrps": {
+                  "parentId": "dataPedigree",
+                  "dataSourcesMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "linkedDataObjectMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "viewDataObjectMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "unionDataObjectMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "tableDataObjectMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "workspaceDataObjectMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "pendingApprovalDataObjectMenu": "@l2_dashboards/l2_data_pedigree/functional/objectLibrary/contextMenu/index",
+                  "initialWidth": "350px"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/l2_data_pedigree/index.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json",
+    "component": {
+      "acceptPrps": {
+        "nodeHeaderId": "string",
+        "nodeIcon": "string",
+        "nodeData": "object",
+        "nodeLabel": {
+          "morph": true,
+          "morphVariable": "result",
+          "morphActions": [
+            {
+              "type": "applyComparison",
+              "operator": "some",
+              "comparisons": [
+                {
+                  "operator": "isEqual",
+                  "value": "%nodeData.tab_type%",
+                  "compareValue": "View"
+                },
+                {
+                  "operator": "isEqual",
+                  "value": "%nodeData.tab_type%",
+                  "compareValue": "Union"
+                }
+              ],
+              "branch": {
+                "true": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "%nodeData.hed_nme%"
+                  }
+                ],
+                "false": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "%nodeData.hed_cde%"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "backgroundColor": "string",
+        "backgroundColorWithCache": {
+          "morph": true,
+          "morphVariable": "result",
+          "morphActions": [
+            {
+              "type": "applyComparison",
+              "operator": "isTruthy",
+              "value": "$nodeData.dev_viw_cde$",
+              "branch": {
+                "true": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "primary"
+                  }
+                ],
+                "false": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "%backgroundColor%"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "filterId": "string",
+        "rootObjectBorder": {
+          "morph": true,
+          "morphVariable": "result",
+          "morphActions": [
+            {
+              "type": "applyComparison",
+              "operator": "isTruthy",
+              "value": "$nodeData.isRootObject$",
+              "branch": {
+                "true": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "2px solid var(--colors-fluorescentBlue)"
+                  }
+                ],
+                "false": [
+                  {
+                    "type": "setVariable",
+                    "name": "result",
+                    "value": "unset"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "fieldWgts": "array",
+        "fieldWgtsToShowInitial": "array"
+      },
+      "scope": "pedigreeHeader",
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/index",
+          "traitPrps": {
+            "nodeData": "$nodeData$"
+          },
+          "def": {
+            "acceptPrps": {
+              "nodeData": "object"
+            },
+            "traits": [
+              {
+                "condition": {
+                  "operator": "all",
+                  "^comparisons": [
+                    {
+                      "operator": "isTruthy",
+                      "value": "{{state.||objectBuilder||.vis}}"
+                    },
+                    {
+                      "operator": "isFalsy",
+                      "value": "{{state.||dataPedigree||.isModalContent}}"
+                    }
+                  ]
+                },
+                "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/dataObject/index",
+                "traitPrps": {
+                  "nodeData": "$nodeData$"
+                }
+              },
+              {
+                "condition": {
+                  "operator": "all",
+                  "^comparisons": [
+                    {
+                      "operator": "isEqual",
+                      "value": "((state.||sidebar||.selectedDashboard))",
+                      "compareValue": "@l2_dashboards/l2_data_pedigree/index"
+                    },
+                    {
+                      "operator": "isFalsy",
+                      "value": "{{state.||dataPedigree||.isModalContent}}"
+                    }
+                  ]
+                },
+                "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/dataPedigree/index",
+                "traitPrps": {
+                  "nodeData": "$nodeData$"
+                }
+              },
+              {
+                "condition": {
+                  "operator": "isTruthy",
+                  "value": "{{state.||dataPedigree||.isModalContent}}"
+                },
+                "trait": "@l2_dashboards/l2_data_pedigree/header/contextMenu/DORequestToPublishPanel/index",
+                "traitPrps": {
+                  "nodeData": "$nodeData$"
+                }
+              }
+            ],
+            "prps": {
+              "path": "dashboard/@l2_dashboards/l2_data_pedigree/header/contextMenu/index.json"
+            }
+          }
+        }
+      ],
+      "type": "container",
+      "prps": {
+        "tSetFieldWgts": null,
+        "scps": [
+          {
+            "triggers": [
+              {
+                "event": "onStateChange",
+                "key": "tSetFieldWgts",
+                "match": [
+                  {
+                    "operator": "isTruthy",
+                    "value": "{{state.self.tSetFieldWgts}}"
+                  }
+                ]
+              }
+            ],
+            "actions": [
+              {
+                "type": "setState",
+                "target": "||pedigreeHeader.fieldWgtsContainer||",
+                "key": "fieldWgtsToShow",
+                "value": "{{state.self.tSetFieldWgts}}"
+              },
+              {
+                "type": "setState",
+                "key": "tSetFieldWgts",
+                "value": null
+              }
+            ]
+          }
+        ],
+        "border": "%rootObjectBorder%",
+        "backgroundColor": "%backgroundColorWithCache%",
+        "defaultColor": "%backgroundColor%",
+        "backfaceVisibility": "hidden",
+        "shadow": "0px 0px 4px 1px rgba(0,0,0,0.14)",
+        "marginTop": "4px",
+        "marginBottom": "4px",
+        "marginRight": "4px",
+        "style": {
+          ".cpnContainer": {
+            "&:first-child": {
+              "margin-left": "4px"
+            }
+          }
+        },
+        "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+      },
+      "wgts": [
+        {
+          "type": "containerSimple",
+          "prps": {
+            "width": "285px",
+            "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+          },
+          "wgts": [
+            {
+              "type": "container",
+              "traits": [
+                {
+                  "trait": "@l2_util/functional/showFullTextOnHoverWithDelay",
+                  "traitPrps": {
+                    "id": "%nodeData.filterId%",
+                    "value": "%nodeLabel%"
+                  }
+                }
+              ],
+              "prps": {
+                "dir": "horizontal",
+                "padding": true,
+                "paddingSize": "tinyPadding smallPadding",
+                "crossAxisAlign": "center",
+                "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+              },
+              "wgts": [
+                {
+                  "type": "icon",
+                  "prps": {
+                    "color": "iconPrimary",
+                    "value": "%nodeIcon%",
+                    "marginRight": "{theme.global.smallPadding}",
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                  }
+                },
+                {
+                  "type": "container",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$nodeData.pub_aft_cre$"
+                  },
+                  "traits": [
+                    "@l2_dashboards/l2_data_pedigree/header/functional/showMetadataOnClick"
+                  ],
+                  "prps": {
+                    "zIndex": 2,
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                  },
+                  "wgts": [
+                    {
+                      "type": "icon",
+                      "prps": {
+                        "color": "error",
+                        "value": "error",
+                        "marginRight": "{theme.global.smallPadding}",
+                        "backgroundColor": "iconPrimary",
+                        "borderRadius": "50%",
+                        "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "label",
+                  "prps": {
+                    "labelType": "h3",
+                    "bold": true,
+                    "color": "iconPrimary",
+                    "cpt": "%nodeLabel%",
+                    "overflow": "hidden",
+                    "textOverflow": "ellipsis",
+                    "whiteSpace": "nowrap",
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                  }
+                },
+                {
+                  "type": "button",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$nodeData.is_aggregate$"
+                  },
+                  "prps": {
+                    "zIndex": 2,
+                    "marginLeft": "{theme.global.smallPadding}",
+                    "prpsIcon": {
+                      "value": "stacked_bar_chart",
+                      "color": "iconPrimary"
+                    },
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                  }
+                },
+                {
+                  "id": "%nodeData.filterId%",
+                  "type": "button",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$nodeData.filters$"
+                  },
+                  "prps": {
+                    "zIndex": 2,
+                    "marginLeft": "{theme.global.smallPadding}",
+                    "prpsIcon": {
+                      "value": "filter_alt",
+                      "color": "iconPrimary"
+                    },
+                    "fireScript": {
+                      "actions": [
+                        {
+                          "type": "setState",
+                          "target": "||dataPedigree||",
+                          "key": "eToggleFilterBox",
+                          "value": {
+                            "headerId": "%nodeHeaderId%",
+                            "headerData": "$nodeData$"
+                          }
+                        }
+                      ]
+                    },
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                  }
+                },
+                {
+                  "condition": {
+                    "operator": "isFalsy",
+                    "value": "$nodeData.isRootObject$"
+                  },
+                  "type": "button",
+                  "prps": {
+                    "zIndex": 2,
+                    "marginLeft": "{theme.global.smallPadding}",
+                    "prpsIcon": {
+                      "value": "expand_more",
+                      "color": "iconPrimary"
+                    },
+                    "fireScript": {
+                      "actions": [
+                        {
+                          "type": "applyComparison",
+                          "operator": "isTruthy",
+                          "value": "{{state.self.isCollapsed}}",
+                          "branch": {
+                            "true": [
+                              {
+                                "type": "setState",
+                                "target": "||dataPedigree||",
+                                "key": "eToggleShowAllFieldWgts",
+                                "value": {
+                                  "headerId": "%nodeHeaderId%",
+                                  "headerFields": "$fieldWgts$",
+                                  "showAll": true
+                                }
+                              },
+                              {
+                                "type": "setState",
+                                "key": "isCollapsed",
+                                "value": false
+                              }
+                            ],
+                            "false": [
+                              {
+                                "type": "setState",
+                                "target": "||dataPedigree||",
+                                "key": "eToggleShowAllFieldWgts",
+                                "value": {
+                                  "headerId": "%nodeHeaderId%",
+                                  "headerFields": "$fieldWgts$",
+                                  "showAll": false
+                                }
+                              },
+                              {
+                                "type": "setState",
+                                "key": "isCollapsed",
+                                "value": true
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "flows": [
+                      {
+                        "from": "||pedigreeHeader.fieldWgtsContainer||",
+                        "fromKey": "fieldWgtsToShow",
+                        "toKey": "isCollapsed",
+                        "mapFunctionString": "fieldWgtsToShow => fieldWgtsToShow.length < $fieldWgts.length$;"
+                      },
+                      {
+                        "fromKey": "isCollapsed",
+                        "toKey": "prpsIcon",
+                        "toSubKey": "value",
+                        "mapFunctionString": "v => v ? 'expand_more' : 'expand_less';"
+                      }
+                    ],
+                    "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "%nodeHeaderId%-fieldWgtsContainer",
+              "relId": "fieldWgtsContainer",
+              "type": "container",
+              "prps": {
+                "fieldWgtsToShow": "$fieldWgtsToShowInitial$",
+                "scps": [
+                  {
+                    "id": "sSFW",
+                    "triggers": [
+                      {
+                        "event": "onMount"
+                      },
+                      {
+                        "event": "onStateChange",
+                        "key": "fieldWgtsToShow"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "condition": {
+                          "operator": "isTruthy",
+                          "value": "{{sSFW.state.self.extraWgts.length}}"
+                        },
+                        "type": "setState",
+                        "key": "deleteKeys",
+                        "value": [
+                          {
+                            "key": "extraWgts",
+                            "value": {
+                              "all": true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "setState",
+                        "key": "extraWgts",
+                        "value": "{{state.self.fieldWgtsToShow}}"
+                      }
+                    ]
+                  }
+                ],
+                "path": "dashboard/@l2_dashboards/l2_data_pedigree/headerOptimized/index.json"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_event_builder/panels/createEditEventPanel/container/functional/dropdownKeyboardNavigation/traits/keyboardNavigator/index.json",
+    "component": {
+      "acceptPrps": {},
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_event_builder/panels/createEditEventPanel/container/functional/dropdownKeyboardNavigation/traits/keyboardNavigator/modifyRowHoveredWithKey",
+          "traitPrps": {
+            "keyCode": 38,
+            "delta": -1
+          },
+          "def": {
+            "acceptPrps": {
+              "keyCode": "integer",
+              "delta": "integer"
+            },
+            "prps": {
+              "scps": [
+                {
+                  "triggers": [
+                    {
+                      "event": "onKeyDown",
+                      "matchEvaluation": "some",
+                      "match": [
+                        {
+                          "comparison": "isEqual",
+                          "value": "((event.keyCode))",
+                          "compareValue": "$keyCode$"
+                        }
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "setVariable",
+                      "name": "lkpId",
+                      "value": "POPUP1-((state.self.id))"
+                    },
+                    {
+                      "type": "setVariable",
+                      "name": "hoveredRow",
+                      "value": "((state.((variable.lkpId)).hoveredRow))"
+                    },
+                    {
+                      "type": "setVariable",
+                      "name": "recordCount",
+                      "value": "((state.((variable.lkpId)).recordCount))"
+                    },
+                    {
+                      "type": "setVariable",
+                      "name": "nextIndex",
+                      "value": "eval-( ((variable.hoveredRow)) + %delta% ) % ((variable.recordCount))"
+                    },
+                    {
+                      "type": "applyComparison",
+                      "operator": "isLessThan",
+                      "value": "{{variable.nextIndex}}",
+                      "compareValue": 0,
+                      "branch": {
+                        "true": [
+                          {
+                            "type": "setVariable",
+                            "name": "nextIndex",
+                            "value": "eval-((variable.recordCount)) - 1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "setState",
+                      "target": "POPUP1-((state.self.id))",
+                      "key": "hoveredRow",
+                      "value": "{{variable.nextIndex}}"
+                    }
+                  ]
+                }
+              ],
+              "path": "dashboard/@l2_dashboards/l2_event_builder/panels/createEditEventPanel/container/functional/dropdownKeyboardNavigation/traits/keyboardNavigator/modifyRowHoveredWithKey.json"
+            }
+          }
+        },
+        {
+          "trait": "@l2_dashboards/l2_event_builder/panels/createEditEventPanel/container/functional/dropdownKeyboardNavigation/traits/keyboardNavigator/modifyRowHoveredWithKey",
+          "traitPrps": {
+            "keyCode": 40,
+            "delta": 1
+          },
+          "def": {
+            "acceptPrps": {
+              "keyCode": "integer",
+              "delta": "integer"
+            },
+            "prps": {
+              "scps": [
+                {
+                  "triggers": [
+                    {
+                      "event": "onKeyDown",
+                      "matchEvaluation": "some",
+                      "match": [
+                        {
+                          "comparison": "isEqual",
+                          "value": "((event.keyCode))",
+                          "compareValue": "$keyCode$"
+                        }
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "setVariable",
+                      "name": "lkpId",
+                      "value": "POPUP1-((state.self.id))"
+                    },
+                    {
+                      "type": "setVariable",
+                      "name": "hoveredRow",
+                      "value": "((state.((variable.lkpId)).hoveredRow))"
+                    },
+                    {
+                      "type": "setVariable",
+                      "name": "recordCount",
+                      "value": "((state.((variable.lkpId)).recordCount))"
+                    },
+                    {
+                      "type": "setVariable",
+                      "name": "nextIndex",
+                      "value": "eval-( ((variable.hoveredRow)) + %delta% ) % ((variable.recordCount))"
+                    },
+                    {
+                      "type": "applyComparison",
+                      "operator": "isLessThan",
+                      "value": "{{variable.nextIndex}}",
+                      "compareValue": 0,
+                      "branch": {
+                        "true": [
+                          {
+                            "type": "setVariable",
+                            "name": "nextIndex",
+                            "value": "eval-((variable.recordCount)) - 1"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "setState",
+                      "target": "POPUP1-((state.self.id))",
+                      "key": "hoveredRow",
+                      "value": "{{variable.nextIndex}}"
+                    }
+                  ]
+                }
+              ],
+              "path": "dashboard/@l2_dashboards/l2_event_builder/panels/createEditEventPanel/container/functional/dropdownKeyboardNavigation/traits/keyboardNavigator/modifyRowHoveredWithKey.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/l2_event_builder/panels/createEditEventPanel/container/functional/dropdownKeyboardNavigation/traits/keyboardNavigator/index.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/functional/contextMenu/index.json",
+    "component": {
+      "acceptPrps": {
+        "rowData": "object",
+        "rowNumber": "number"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Modify",
+                      "icon": "edit"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/l2_event_builder/sidebar/list/row/functional/actions/modifyEvent",
+                    "traitPrps": {
+                      "rowData": "$rowData$",
+                      "rowNumber": "$rowNumber$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Copy Name",
+                      "icon": "content_paste"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/l2_object_builder/objectLibrary/functional/contextMenu/actions/copyMenuItemLabel",
+                    "traitPrps": {
+                      "copyValue": "$rowData.act_cde$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/functional/contextMenu/index.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/index.json",
+    "component": {
+      "acceptPrps": {
+        "rowData": "object",
+        "rowNumber": "number"
+      },
+      "type": "container",
+      "relId": "row_%rowNumber%",
+      "scope": "row",
+      "traits": [
+        {
+          "trait": "@l2_dashboards/l2_event_builder/sidebar/list/row/functional/contextMenu/index",
+          "traitPrps": {
+            "rowData": "$rowData$",
+            "rowNumber": "$rowNumber$"
+          },
+          "def": {
+            "acceptPrps": {
+              "rowData": "object",
+              "rowNumber": "number"
+            },
+            "traits": [
+              {
+                "trait": "@l2_context_menu/index",
+                "traitPrps": {
+                  "wgts": [
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Modify",
+                            "icon": "edit"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/l2_event_builder/sidebar/list/row/functional/actions/modifyEvent",
+                          "traitPrps": {
+                            "rowData": "$rowData$",
+                            "rowNumber": "$rowNumber$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Copy Name",
+                            "icon": "content_paste"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/l2_object_builder/objectLibrary/functional/contextMenu/actions/copyMenuItemLabel",
+                          "traitPrps": {
+                            "copyValue": "$rowData.act_cde$"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "prps": {
+              "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/functional/contextMenu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "padding": true,
+        "paddingSize": "noPadding smallPadding noPadding padding",
+        "canClick": true,
+        "overflow": "hidden",
+        "canHover": true,
+        "backgroundColor": "transparent",
+        "dir": "horizontal",
+        "crossAxisAlign": "center",
+        "height": "34px",
+        "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/index.json"
+      },
+      "wgts": [
+        {
+          "type": "containerSimple",
+          "prps": {
+            "flex": true,
+            "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/index.json"
+          },
+          "wgts": [
+            {
+              "type": "label",
+              "prps": {
+                "cpt": "%rowData.act_cde%",
+                "textOverflow": "ellipsis",
+                "overflow": "hidden",
+                "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/index.json"
+              }
+            }
+          ]
+        },
+        {
+          "traits": [
+            {
+              "trait": "@l2_dashboards/l2_event_builder/sidebar/list/row/hoverButtons/index"
+            }
+          ],
+          "prps": {
+            "path": "dashboard/@l2_dashboards/l2_event_builder/sidebar/list/row/index.json"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/createEditRelationshipPanel/form/storeObjectRelationshipPanel.json",
+    "component": {
+      "acceptPrps": {},
+      "scope": "storeObjectRelationshipPanel",
+      "type": "containerSimple",
+      "prps": {
+        "vis": false,
+        "path": "dashboard/@l2_dashboards/l2_object_builder/panels/createEditRelationshipPanel/form/storeObjectRelationshipPanel.json"
+      },
+      "traits": [
+        {
+          "trait": "@l2_modal_panel/index",
+          "traitPrps": {
+            "wgtsTop": [],
+            "wgtsMiddle": [
+              {
+                "type": "label",
+                "prps": {
+                  "whiteSpace": "pre",
+                  "cpt": "Stored object relationships are used to populate the Linked Objects list when building a data object."
+                }
+              }
+            ],
+            "wgtsBottom": [
+              {
+                "type": "containerSimple",
+                "prps": {
+                  "dir": "horizontal",
+                  "mainAxisAlign": "end"
+                },
+                "wgts": [
+                  {
+                    "traits": [
+                      {
+                        "trait": "@l2_dashboards/overrides/l2_buttons/primary/index",
+                        "traitPrps": {
+                          "cpt": "Close",
+                          "icon": "close"
+                        }
+                      }
+                    ],
+                    "prps": {
+                      "fireScript": {
+                        "actions": [
+                          {
+                            "type": "setState",
+                            "target": "||storeObjectRelationshipPanel||",
+                            "key": "vis",
+                            "value": false
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgtsTop": {
+                "comment": "Wgts that are rendered at the top of the panel",
+                "type": "array"
+              },
+              "wgtsMiddle": {
+                "comment": "Wgts that are rendered in the middle of the panel",
+                "type": "array"
+              },
+              "wgtsBottom": {
+                "comment": "Wgts that are rendered at the bottom of the panel",
+                "type": "array"
+              },
+              "containerPrps": {
+                "type": "object",
+                "dft": {}
+              },
+              "width": {
+                "type": "string",
+                "dft": "40%"
+              },
+              "height": {
+                "type": "string"
+              },
+              "minWidth": {
+                "type": "string",
+                "dft": "600px"
+              },
+              "minHeight": {
+                "type": "string"
+              },
+              "maxWidth": {
+                "type": "string",
+                "dft": "100%"
+              },
+              "maxHeight": {
+                "type": "string",
+                "dft": "100%"
+              },
+              "zIndex": {
+                "type": "integer",
+                "dft": 10000
+              },
+              "canEscapeToCloseModal": {
+                "type": "boolean",
+                "dft": true
+              }
+            },
+            "scope": "modalPanel",
+            "traits": [
+              {
+                "condition": {
+                  "operator": "isTruthy",
+                  "value": "$canEscapeToCloseModal$"
+                },
+                "trait": "@l2_modal_panel/functional/updatePanelStackOnVisChanged",
+                "traitPrps": {}
+              }
+            ],
+            "type": "containerSimple",
+            "container": "systemDashboard",
+            "prps": {
+              "vis": false,
+              "position": "absolute",
+              "top": 0,
+              "left": 0,
+              "height": "100%",
+              "width": "100%",
+              "mainAxisAlign": "center",
+              "crossAxisAlign": "center",
+              "zIndex": "$zIndex$",
+              "backgroundColor": "rgba(0, 0, 0, 0.5)",
+              "padding": true,
+              "paddingSize": "bigPadding",
+              "path": "dashboard/@l2_modal_panel/index.json"
+            },
+            "wgts": [
+              {
+                "relId": "panelInner",
+                "type": "containerSimple",
+                "prps": {
+                  "width": "clamp(min(%minWidth%, %maxWidth%), max(%minWidth%, %maxWidth%), %width%)",
+                  "maxHeight": "$maxHeight$",
+                  "minHeight": "$minHeight$",
+                  "height": "$height$",
+                  "roundedBorders": true,
+                  "backgroundColor": "iconPrimary",
+                  "path": "dashboard/@l2_modal_panel/index.json"
+                },
+                "wgts": [
+                  {
+                    "type": "containerSimple",
+                    "prps": {
+                      "flex": true,
+                      "mainAxisAlign": "start",
+                      "gap": "smallPadding",
+                      "padding": true,
+                      "spread-": "$containerPrps$",
+                      "path": "dashboard/@l2_modal_panel/index.json"
+                    },
+                    "wgts": [
+                      {
+                        "relId": "top",
+                        "type": "containerSimple",
+                        "wgts": "$wgtsTop$"
+                      },
+                      {
+                        "type": "containerSimple",
+                        "prps": {
+                          "flex": true,
+                          "overflowY": "auto",
+                          "path": "dashboard/@l2_modal_panel/index.json"
+                        },
+                        "wgts": "$wgtsMiddle$"
+                      },
+                      {
+                        "relId": "bottom",
+                        "type": "containerSimple",
+                        "condition": {
+                          "operator": "isNotFalsy",
+                          "value": "$wgtsBottom$"
+                        },
+                        "wgts": "$wgtsBottom$"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/createEditFieldPanel/toolbar/functional/actions/cudDoFields.json/traitPrps",
+    "component": {
+      "scope": "string",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/createEditFieldPanel/toolbar/functional/onClickSave.json/prps/fireScript/actions/4/branch/true/1/branch/true/0/value/confirmButtonScript/actions/1/traits/0/traitPrps",
+    "component": {
+      "scope": "sCEF",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/createEditFieldPanel/toolbar/functional/onClickSave.json/prps/fireScript/actions/4/branch/true/1/branch/false/0/traits/0/traitPrps",
+    "component": {
+      "scope": "sCEF",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/createEditFieldPanel/toolbar/functional/onClickSave.json/prps/fireScript/actions/4/branch/false/0/traits/0/traitPrps",
+    "component": {
+      "scope": "sCEF",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/grid/functional/modifiedRecordsManager/functional/onModifiedRecordsChanged.json/prps/scps/0/actions/1/actions/3/branch/true/1/branch/true/0/value/confirmButtonScript/actions/1/traits/0/traitPrps",
+    "component": {
+      "scope": "cBSOMRC",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/grid/functional/modifiedRecordsManager/functional/onModifiedRecordsChanged.json/prps/scps/0/actions/1/actions/3/branch/true/1/branch/false/0/traits/0/traitPrps",
+    "component": {
+      "scope": "sODRC",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/dataObjectFieldsPanel/dataObjectFieldsGrid/grid/functional/modifiedRecordsManager/functional/onModifiedRecordsChanged.json/prps/scps/0/actions/1/actions/3/branch/false/0/traits/0/traitPrps",
+    "component": {
+      "scope": "sODRC",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/moreInfoPanel/container/compare/firstCompareGrid/functional/setGridOnGridTypeChanged.json/prps/scps/0/actions/2/branch/Data Source Query/0/value/traits/0/traitPrps",
+    "component": {
+      "relId": "firstCompareGridDataSourceQuery",
+      "gridId": "firstCompareGridDataSource",
+      "traitDataManager": "@l2_dashboards/l2_object_builder/panels/moreInfoPanel/container/compare/firstCompareGrid/functional/dataSourceGridManager/index",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/moreInfoPanel/container/compare/secondCompareGrid/functional/setGridOnGridTypeChanged.json/prps/scps/0/actions/2/branch/Data Source Query/0/value/traits/0/traitPrps",
+    "component": {
+      "relId": "secondCompareGridDataSourceQuery",
+      "gridId": "secondCompareGridDataSource",
+      "traitDataManager": "@l2_dashboards/l2_object_builder/panels/moreInfoPanel/container/compare/secondCompareGrid/functional/dataSourceGridManager/index",
+      "is2ndCompare": true,
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/moreInfoPanel/container/history/grid/functional/setGridOnGridTypeChanged.json/prps/scps/0/actions/2/branch/Data Source Query/0/value/traits/0/traitPrps",
+    "component": {
+      "relId": "dataSourceQuery",
+      "traitDataManager": "@l2_dashboards/l2_object_builder/panels/moreInfoPanel/container/compare/firstCompareGrid/functional/dataSourceGridManager/index",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_object_builder/panels/sqlParser/content/index.json/wgts/0/wgts/0/wgts/0",
+    "component": {
+      "relId": "dataObjectName",
+      "trait": "@l2_inputs/formInput/index",
+      "traitPrps": {
+        "label": "Data Object Name",
+        "prpsInput": {
+          "mandatory": true,
+          "maxLength": 200,
+          "regex": "^[a-zA-Z0-9_]*$",
+          "errorOverrides": {
+            "regex": "Name contains special characters."
+          },
+          "tags": [
+            "propertiesField"
+          ],
+          "flows": [
+            {
+              "to": "||dataObjectPropertiesForm||",
+              "toKey": "dataObjectModified",
+              "toSubKey": "hed_cde"
+            }
+          ]
+        }
+      },
+      "prps": {
+        "flex": true,
+        "flows": [
+          {
+            "to": "||sqlParser||",
+            "toKey": "hedNme"
+          }
+        ],
+        "path": "dashboard/@l2_dashboards/l2_object_builder/panels/sqlParser/content/index.json"
+      },
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/manageOrganisationRoleTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/index.json/wgts/1/wgts/1/prps/rowMda/traits/0/traitPrps",
+    "component": {
+      "type": "{{rowData.key}}"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/manageOrganisationRoleTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/tagRow/index.json/wgts/0/wgts/1/traits/0/traitPrps",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/manageOrganisationRoleTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/index.json/wgts/1/wgts/1/prps/rowMda/traits/0/traitPrps",
+    "component": {
+      "type": "{{rowData.key}}"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/manageOrganisationRoleTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/typeRow/index.json/wgts/0/wgts/0/traits/0/traitPrps",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/menuAccessPanel/container/menuStructure/treeView/functionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_fnc_id": "$rowData.prc_fnc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/menuAccessPanel/container/menuStructure/treeView/menuItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_id": "$rowData.prc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/menuAccessPanel/container/menuStructure/treeView/sectionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_sec_id": "$rowData.prc_sct_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/index.json/wgts/1/wgts/1/prps/rowMda/traits/0/traitPrps",
+    "component": {
+      "type": "{{rowData.grp_typ_cde}}",
+      "desc": "{{rowData.grp_typ_des}}"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/tagRow/index.json/wgts/0/wgts/1/traits/0/traitPrps",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/tagRow/onRemoveRow.json/prps/fireScript/actions/0/value",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/index.json/wgts/1/wgts/1/prps/rowMda/traits/0/traitPrps",
+    "component": {
+      "type": "{{rowData.grp_typ_cde}}",
+      "desc": "{{rowData.grp_typ_des}}"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/typeRow/index.json/wgts/0/wgts/0/traits/0/traitPrps",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/typeRow/onAddRow.json/prps/fireScript/actions/0/value",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/menuAccessPanel/container/menuStructure/treeView/functionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_fnc_id": "$rowData.prc_fnc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/menuAccessPanel/container/menuStructure/treeView/menuItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_id": "$rowData.prc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_organisation_management/reskin/rolesGrid/menuAccessPanel/container/menuStructure/treeView/sectionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_sec_id": "$rowData.prc_sct_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/index.json/wgts/1/wgts/1/prps/rowMda/traits/0/traitPrps",
+    "component": {
+      "type": "{{rowData.key}}"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/assignedRoleTypeContainer/tagRow/index.json/wgts/0/wgts/1/traits/0/traitPrps",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/index.json/wgts/1/wgts/1/prps/rowMda/traits/0/traitPrps",
+    "component": {
+      "type": "{{rowData.key}}"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/manageRoleOrganisationTypesPanel/container/roleRoleTypeLinker/availableRoleTypeContainer/typeRow/index.json/wgts/0/wgts/0/traits/0/traitPrps",
+    "component": {
+      "type": "%type%"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/menuAccessPanel/container/menuStructure/treeView/functionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_fnc_id": "$rowData.prc_fnc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/menuAccessPanel/container/menuStructure/treeView/menuItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_id": "$rowData.prc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/menuAccessPanel/container/menuStructure/treeView/sectionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_sec_id": "$rowData.prc_sct_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/reskin/organisationsGrid/menuAccessPanel/container/menuStructure/treeView/functionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_fnc_id": "$rowData.prc_fnc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/reskin/organisationsGrid/menuAccessPanel/container/menuStructure/treeView/menuItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_id": "$rowData.prc_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/l2_role_management/reskin/organisationsGrid/menuAccessPanel/container/menuStructure/treeView/sectionItem/index.json/traits/0/traitPrps",
+    "component": {
+      "vis": "$rowData.vis$",
+      "ena": "$rowData.ena$",
+      "type": "%rowData.typ%",
+      "prc_sec_id": "$rowData.prc_sct_idn$"
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/folderContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Create Subfolder",
+                      "icon": "account_tree"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setMultiState",
+                        "target": "||objectLibrary.createFolderPanel||",
+                        "value": {
+                          "vis": true,
+                          "folderNodeData": "$rowData$",
+                          "nodeId": "%nodeId%"
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Delete",
+                      "icon": "delete"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setMultiState",
+                        "target": "||objectLibrary.deleteFolderPanel||",
+                        "value": {
+                          "vis": true,
+                          "parentNodeId": "%parentNodeId%",
+                          "folderNodeData": "$rowData$",
+                          "titleDataKey": "folderNodeData",
+                          "titleCptKey": "fdr_des"
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Rename",
+                      "icon": "edit"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setMultiState",
+                        "target": "||objectLibrary.renameFolderPanel||",
+                        "value": {
+                          "vis": true,
+                          "nodeId": "%nodeId%",
+                          "parentNodeId": "%parentNodeId%",
+                          "folderNodeData": "$rowData$"
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Manage security",
+                      "icon": "security"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setMultiState",
+                        "target": "||objectLibrary.folderSecurityPanel||",
+                        "value": {
+                          "vis": true,
+                          "dataObject": "$rowData$"
+                        }
+                      },
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/folderContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/viewDataObjectMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "View",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/modifyDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$",
+                      "mode": "View"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Lineage",
+                      "icon": "account_tree"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/pedigreeDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Preview Data",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/launchRunDOTab",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "prps": {
+                  "flows": [
+                    {
+                      "from": "||objectLibrary||",
+                      "fromSubKey": "dev_group_indicator",
+                      "toKey": "enabled",
+                      "mapFunctionString": "v => v && '%rowData.upd_ind%' === 'true'"
+                    }
+                  ]
+                },
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Check Out",
+                      "icon": "content_copy"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/checkOut",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "prps": {
+                  "flows": [
+                    {
+                      "from": "||objectLibrary||",
+                      "fromSubKey": "dev_group_indicator",
+                      "toKey": "enabled"
+                    }
+                  ]
+                },
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Copy",
+                      "icon": "save_as"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/saveAs",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Download Metadata",
+                      "icon": "download"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/downloadMetadata",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Validate",
+                      "icon": "fact_check"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/validateDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "prps": {
+                  "enabled": "$rowData.upd_ind$"
+                },
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Archive",
+                      "icon": "archive"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/archiveDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "operator": "all",
+                  "comparisons": [
+                    {
+                      "operator": "isEqual",
+                      "value": "%list_identifier%",
+                      "compareValue": "data_objects_list_folder_item"
+                    },
+                    {
+                      "operator": "notContainedInCase",
+                      "value": "object_library_data_object_folder_uncategorised",
+                      "compareValue": "%nodeId%"
+                    },
+                    {
+                      "operator": "notContainedInCase",
+                      "value": "object_library_data_object_folder_linked",
+                      "compareValue": "%nodeId%"
+                    }
+                  ]
+                },
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Remove from folder",
+                      "icon": "delete"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setMultiState",
+                        "target": "||objectLibrary.removeDOFromFolderPanel||",
+                        "value": {
+                          "vis": true,
+                          "parentNodeId": "%parentNodeId%",
+                          "folderNodeData": "$rowData$",
+                          "titleDataKey": "folderNodeData",
+                          "titleCptKey": "hed_nme"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/viewDataObjectMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/unionDataObjectMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/viewDataObjectMenu",
+          "traitPrps": {
+            "nodeId": "$nodeId$",
+            "parentNodeId": "$parentNodeId$",
+            "rowId": "$rowId$",
+            "rowName": "$rowName$",
+            "rowData": "$rowData$",
+            "list_identifier": "$list_identifier$"
+          },
+          "def": {
+            "acceptPrps": {
+              "nodeId": "string",
+              "parentNodeId": "string",
+              "rowId": "string",
+              "rowName": "string",
+              "rowData": "object",
+              "list_identifier": "string"
+            },
+            "traits": [
+              {
+                "trait": "@l2_context_menu/index",
+                "traitPrps": {
+                  "wgts": [
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "View",
+                            "icon": "preview"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/modifyDataObject",
+                          "traitPrps": {
+                            "dataObject": "$rowData$",
+                            "mode": "View"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Lineage",
+                            "icon": "account_tree"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/pedigreeDataObject",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Preview Data",
+                            "icon": "preview"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/launchRunDOTab",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "prps": {
+                        "flows": [
+                          {
+                            "from": "||objectLibrary||",
+                            "fromSubKey": "dev_group_indicator",
+                            "toKey": "enabled",
+                            "mapFunctionString": "v => v && '%rowData.upd_ind%' === 'true'"
+                          }
+                        ]
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Check Out",
+                            "icon": "content_copy"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/checkOut",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "prps": {
+                        "flows": [
+                          {
+                            "from": "||objectLibrary||",
+                            "fromSubKey": "dev_group_indicator",
+                            "toKey": "enabled"
+                          }
+                        ]
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Copy",
+                            "icon": "save_as"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/saveAs",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Download Metadata",
+                            "icon": "download"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/downloadMetadata",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Validate",
+                            "icon": "fact_check"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/validateDataObject",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "prps": {
+                        "enabled": "$rowData.upd_ind$"
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Archive",
+                            "icon": "archive"
+                          }
+                        },
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/archiveDataObject",
+                          "traitPrps": {
+                            "dataObject": "$rowData$"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "condition": {
+                        "operator": "all",
+                        "comparisons": [
+                          {
+                            "operator": "isEqual",
+                            "value": "%list_identifier%",
+                            "compareValue": "data_objects_list_folder_item"
+                          },
+                          {
+                            "operator": "notContainedInCase",
+                            "value": "object_library_data_object_folder_uncategorised",
+                            "compareValue": "%nodeId%"
+                          },
+                          {
+                            "operator": "notContainedInCase",
+                            "value": "object_library_data_object_folder_linked",
+                            "compareValue": "%nodeId%"
+                          }
+                        ]
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_context_menu/visual/menuItem",
+                          "traitPrps": {
+                            "cpt": "Remove from folder",
+                            "icon": "delete"
+                          }
+                        }
+                      ],
+                      "prps": {
+                        "fireScript": {
+                          "actions": [
+                            {
+                              "type": "setState",
+                              "target": "CONTEXT1",
+                              "key": "display",
+                              "value": false
+                            },
+                            {
+                              "type": "setMultiState",
+                              "target": "||objectLibrary.removeDOFromFolderPanel||",
+                              "value": {
+                                "vis": true,
+                                "parentNodeId": "%parentNodeId%",
+                                "folderNodeData": "$rowData$",
+                                "titleDataKey": "folderNodeData",
+                                "titleCptKey": "hed_nme"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "prps": {
+              "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/viewDataObjectMenu.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataObjects/unionDataObjectMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/dataSourceEntityContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "View Entity",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/showDataSourceEntity",
+                    "traitPrps": {
+                      "nodeId": "$nodeId$",
+                      "parentNodeId": "$parentNodeId$",
+                      "rowId": "$rowId$",
+                      "rowName": "$rowName$",
+                      "rowData": "$rowData$",
+                      "list_identifier": "$list_identifier$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Dependencies",
+                      "icon": "account_tree"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/pedigreeDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/dataSourceEntityContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/dataSourceContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Configuration",
+                      "icon": "settings_applications"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/editDataSource",
+                    "traitPrps": {
+                      "nodeId": "$nodeId$",
+                      "parentNodeId": "$parentNodeId$",
+                      "rowId": "$rowId$",
+                      "rowName": "$rowName$",
+                      "rowData": "$rowData$",
+                      "list_identifier": "$list_identifier$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Test Connection",
+                      "icon": "done"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/testConnection",
+                    "traitPrps": {
+                      "dataSource": "$rowData$",
+                      "rowId": "%rowId%"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Entity Discovery",
+                      "icon": "query_stats"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/launchEntityDiscovery",
+                    "traitPrps": {
+                      "dataSource": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Discovery Progress",
+                      "icon": "insights"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/launchDiscoveryProgress",
+                    "traitPrps": {
+                      "dataSource": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "View Entities",
+                      "icon": "workspaces"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/launchEntitiesTab",
+                    "traitPrps": {
+                      "dataSource": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Validate Data Source",
+                      "icon": "fact_check"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/validateDataSource",
+                    "traitPrps": {
+                      "dataSource": "$rowData$",
+                      "rowId": "%rowId%"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Manage Security",
+                      "icon": "security"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/editDataSource",
+                    "traitPrps": {
+                      "openSubTab": "access",
+                      "nodeId": "$nodeId$",
+                      "parentNodeId": "$parentNodeId$",
+                      "rowId": "$rowId$",
+                      "rowName": "$rowName$",
+                      "rowData": "$rowData$",
+                      "list_identifier": "$list_identifier$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Delete",
+                      "cptColor": "error",
+                      "icon": "delete_forever",
+                      "iconColor": "error"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/deleteDataSource",
+                    "traitPrps": {
+                      "dataSource": "$rowData$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/dataSourceContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/dataSourceNonDiscoverableContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Configuration",
+                      "icon": "settings_applications"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/editDataSource",
+                    "traitPrps": {
+                      "nodeId": "$nodeId$",
+                      "parentNodeId": "$parentNodeId$",
+                      "rowId": "$rowId$",
+                      "rowName": "$rowName$",
+                      "rowData": "$rowData$",
+                      "list_identifier": "$list_identifier$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Manage Security",
+                      "icon": "security"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/editDataSource",
+                    "traitPrps": {
+                      "openSubTab": "access",
+                      "nodeId": "$nodeId$",
+                      "parentNodeId": "$parentNodeId$",
+                      "rowId": "$rowId$",
+                      "rowName": "$rowName$",
+                      "rowData": "$rowData$",
+                      "list_identifier": "$list_identifier$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Delete",
+                      "cptColor": "error",
+                      "icon": "delete_forever",
+                      "iconColor": "error"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/actions/deleteDataSource",
+                    "traitPrps": {
+                      "dataSource": "$rowData$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/dataSources/dataSourceNonDiscoverableContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/pendingApproval/requestToPublishDataObjectContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Review",
+                      "icon": "published_with_changes"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/publishDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Lineage",
+                      "icon": "account_tree"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/pedigreeDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Preview Data",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/launchRunDOTab",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/pendingApproval/requestToPublishDataObjectContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/requestToPublish/dataObjectMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Preview",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/runDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Copy Name",
+                      "icon": "content_paste"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/copyMenuItemLabel",
+                    "traitPrps": {
+                      "copyValue": "$rowData.hed_nme$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Configuration",
+                      "icon": "settings_applications"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/launchDOConfiguration",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/requestToPublish/dataObjectMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/requestToPublish/tableObjectMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Preview",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/runDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Copy Name",
+                      "icon": "content_paste"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/copyMenuItemLabel",
+                    "traitPrps": {
+                      "copyValue": "$rowData.hed_cde$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/requestToPublish/tableObjectMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/workspaces/folderContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Clear Workspace",
+                      "icon": "delete"
+                    }
+                  }
+                ],
+                "prps": {
+                  "fireScript": {
+                    "actions": [
+                      {
+                        "type": "setState",
+                        "target": "CONTEXT1",
+                        "key": "display",
+                        "value": false
+                      },
+                      {
+                        "type": "setMultiState",
+                        "target": "||objectBuilderContainer.ClearWorkspacePanel||",
+                        "value": {
+                          "vis": true,
+                          "workspace": "$rowData$",
+                          "titleDataKey": "workspace",
+                          "titleCptKey": "name"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/workspaces/folderContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/workspaces/workspaceDataObjectContextMenu.json",
+    "component": {
+      "acceptPrps": {
+        "nodeId": "string",
+        "parentNodeId": "string",
+        "rowId": "string",
+        "rowName": "string",
+        "rowData": "object",
+        "list_identifier": "string"
+      },
+      "traits": [
+        {
+          "trait": "@l2_context_menu/index",
+          "traitPrps": {
+            "wgts": [
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Modify",
+                      "icon": "edit"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/modifyDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$",
+                      "mode": "Update"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Lineage",
+                      "icon": "account_tree"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/pedigreeDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Preview Data",
+                      "icon": "preview"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/launchRunDOTab",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              },
+              {
+                "traits": [
+                  {
+                    "trait": "@l2_context_menu/visual/menuItem",
+                    "traitPrps": {
+                      "cpt": "Delete",
+                      "cptColor": "error",
+                      "icon": "delete_forever",
+                      "iconColor": "error"
+                    }
+                  },
+                  {
+                    "trait": "@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/actions/deleteDataObject",
+                    "traitPrps": {
+                      "dataObject": "$rowData$"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgts": "array",
+              "itemHeight": {
+                "type": "integer",
+                "dft": 34
+              }
+            },
+            "prps": {
+              "contextMenu": {
+                "itemHeight": "$itemHeight$",
+                "mda": {
+                  "type": "containerSimple",
+                  "prps": {
+                    "roundedBorders": true,
+                    "backgroundColor": "iconPrimary",
+                    "hasShadow": true,
+                    "padding": true,
+                    "paddingSize": "tinyPadding",
+                    "minWidth": "max-content"
+                  },
+                  "wgts": "$wgts$"
+                }
+              },
+              "path": "dashboard/@l2_context_menu/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/contextMenu/workspaces/workspaceDataObjectContextMenu.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json",
+    "component": {
+      "acceptPrps": {
+        "parentElementId": "string",
+        "parentNodeId": "string",
+        "nodeId": "string",
+        "list_identifier": "string",
+        "name": "string",
+        "custom_icon": "string",
+        "data": "object",
+        "hasChildren": "boolean",
+        "expanded": "boolean",
+        "click_action_trait": "mixed",
+        "contextMenu": "mixed",
+        "tooltip": "array",
+        "marginSizePerDepth": {
+          "dft": 24
+        },
+        "containerType": {
+          "morph": true,
+          "morphVariable": "res",
+          "morphActions": [
+            {
+              "type": "setVariable",
+              "name": "res",
+              "value": "{{eval.   const cond1 = '%list_identifier%' === 'data_objects_list_folder' &&                 '%nodeId%' !== 'object_library_data_object_folder_linked' &&                 '%nodeId%' !== 'object_library_data_object_folder_uncategorised';    const cond2 = '%list_identifier%' === 'data_objects_list_folder_item';   const cond3 = '%list_identifier%' === 'data_sources_list_folder_item';   const cond4 = '%list_identifier%' === 'workspaces_list_folder_item';    const result = cond1 || cond2 || cond3 || cond4 ? 'containerDnd' : 'container';   result; }}"
+            }
+          ]
+        },
+        "innerContainerType": {
+          "morph": true,
+          "morphVariable": "res",
+          "morphActions": [
+            {
+              "type": "setVariable",
+              "name": "res",
+              "value": "{{eval.   const cond1 = '%list_identifier%' === 'data_objects_list_folder' &&                 '%nodeId%' !== 'object_library_data_object_folder_linked' &&                 '%nodeId%' !== 'object_library_data_object_folder_uncategorised';    const cond2 = '%list_identifier%' === 'data_objects_list_folder_item';   const cond3 = '%list_identifier%' === 'data_sources_list_folder_item';   const cond4 = '%list_identifier%' === 'workspaces_list_folder_item';    const result = cond1 || cond2 || cond3 || cond4 ? 'dragger' : 'containerSimple';   result; }}"
+            }
+          ]
+        }
+      },
+      "scope": "explorerListItem",
+      "type": "%containerType%",
+      "auth": [
+        "expanded"
+      ],
+      "prps": {
+        "position": "relative",
+        "height": 35,
+        "dir": "horizontal",
+        "crossAxisAlign": "center",
+        "expanded": "$expanded$",
+        "morphProps": [
+          "marginLeft",
+          "dragTargets",
+          "tags"
+        ],
+        "marginLeft": "{{eval.%depth% * %marginSizePerDepth%}}",
+        "cursor": "pointer",
+        "flex": true,
+        "isLoading": false,
+        "data": {
+          "nodeId": "%nodeId%"
+        },
+        "scps": [
+          {
+            "actions": [
+              {
+                "container_type": "%containerType%",
+                "srcAction": {
+                  "path": "@l2_dashboards/reskin/explorers/objectLibrary/functional/setContainerDndProps"
+                },
+                "list_identifier": "%list_identifier%",
+                "canvas_id": "((state.||objectBuilderCanvas.canvas||.id))"
+              }
+            ]
+          }
+        ],
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+      },
+      "traits": [
+        {
+          "condition": {
+            "operator": "isEqual",
+            "value": "%list_identifier%",
+            "compareValue": "data_sources_list_folder"
+          },
+          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/functional/setDataSourceLoadingSpinner",
+          "traitPrps": {
+            "data": "$data$"
+          }
+        }
+      ],
+      "wgts": [
+        {
+          "id": "%parentElementId%-innerContainerListItem",
+          "type": "%innerContainerType%",
+          "prps": {
+            "data": {
+              "nodeId": "%nodeId%",
+              "parentNodeId": "%parentNodeId%",
+              "spread-": "$data$"
+            },
+            "height": "100%",
+            "width": "100%",
+            "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+          },
+          "wgts": [
+            {
+              "scope": "dropdownHeaderClickCapturer",
+              "id": "%parentElementId%-innerContainerListItem-clickable",
+              "type": "container",
+              "auth": [
+                "tooltipMda"
+              ],
+              "prps": {
+                "canHover": true,
+                "canClick": true,
+                "height": "100%",
+                "width": "100%",
+                "tooltipZIndex": 10005,
+                "morphProps": [
+                  "tooltipMda"
+                ],
+                "tooltipMda": {
+                  "morphVariable": "res",
+                  "morphActions": [
+                    {
+                      "type": "applyComparison",
+                      "operator": "isTruthy",
+                      "value": "$tooltip$",
+                      "branch": {
+                        "true": [
+                          {
+                            "type": "setVariable",
+                            "name": "res",
+                            "value": {
+                              "position": "right-start",
+                              "type": "containerSimple",
+                              "prps": {
+                                "width": "fit-content",
+                                "backgroundColor": "lightSecondary",
+                                "padding": true,
+                                "paddingSize": "tinyPadding",
+                                "roundedBorders": true
+                              },
+                              "wgts": [
+                                {
+                                  "type": "label",
+                                  "prps": {
+                                    "color": "iconPrimary",
+                                    "fontSize": "fontSizeSmall",
+                                    "cpt": "%tooltip.0%"
+                                  }
+                                },
+                                {
+                                  "condition": {
+                                    "operator": "isTruthy",
+                                    "value": "$tooltip.1%"
+                                  },
+                                  "type": "label",
+                                  "prps": {
+                                    "marginTop": "tinyPadding",
+                                    "color": "mediumGrey",
+                                    "fontSize": "fontSizeSmall",
+                                    "cpt": "%tooltip.1%"
+                                  }
+                                },
+                                {
+                                  "condition": {
+                                    "operator": "isTruthy",
+                                    "value": "$tooltip.2%"
+                                  },
+                                  "type": "label",
+                                  "prps": {
+                                    "marginTop": "tinyPadding",
+                                    "color": "mediumGrey",
+                                    "fontSize": "fontSizeSmall",
+                                    "cpt": "%tooltip.2%"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+              },
+              "traits": [
+                {
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$contextMenu$"
+                  },
+                  "trait": "%contextMenu%",
+                  "traitPrps": {
+                    "nodeId": "%nodeId%",
+                    "parentNodeId": "%parentNodeId%",
+                    "rowId": "%nodeId%-inner",
+                    "rowName": "%name%",
+                    "rowData": "$data$",
+                    "list_identifier": "%list_identifier%"
+                  }
+                },
+                {
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$click_action_trait$"
+                  },
+                  "trait": "$click_action_trait.trait$",
+                  "traitPrps": {
+                    "nodeId": "%nodeId%",
+                    "parentNodeId": "%parentNodeId%",
+                    "rowId": "%nodeId%-inner",
+                    "rowName": "%name%",
+                    "rowData": "$data$",
+                    "list_identifier": "%list_identifier%",
+                    "overrideCurrentTab": true,
+                    "spread-": "$click_action_trait.traitPrps$"
+                  }
+                }
+              ],
+              "wgts": [
+                {
+                  "id": "%parentElementId%-dropdownHeaderListItem",
+                  "condition": {
+                    "operator": "isTruthy",
+                    "value": "$hasChildren$"
+                  },
+                  "traits": [
+                    {
+                      "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/dropdownHeaderListItem",
+                      "traitPrps": {
+                        "nodeId": "%nodeId%",
+                        "name": "%name%",
+                        "custom_icon": "$custom_icon$",
+                        "list_identifier": "%list_identifier%",
+                        "data": "$data$",
+                        "parentElementId": "%parentElementId%-dropdownHeaderListItem",
+                        "tooltip": "$tooltip$",
+                        "click_action_trait": "$click_action_trait$"
+                      }
+                    }
+                  ],
+                  "prps": {
+                    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                  }
+                },
+                {
+                  "id": "%parentElementId%-listItemContainer",
+                  "type": "containerSimple",
+                  "prps": {
+                    "flex": true,
+                    "dir": "horizontal",
+                    "crossAxisAlign": "center",
+                    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                  },
+                  "wgts": [
+                    {
+                      "id": "%parentElementId%-dataObjectListItem",
+                      "condition": {
+                        "operator": "all",
+                        "comparisons": [
+                          {
+                            "operator": "isFalsy",
+                            "value": "$hasChildren$"
+                          },
+                          {
+                            "operator": "containedInCase",
+                            "value": "%list_identifier%",
+                            "compareValue": [
+                              "data_objects_list_folder_item",
+                              "workspaces_list_folder_item",
+                              "pending_approvals_list_folder_item"
+                            ]
+                          }
+                        ]
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/dataObjectListItem",
+                          "traitPrps": {
+                            "nodeId": "%nodeId%",
+                            "list_identifier": "%list_identifier%",
+                            "label": "%name%",
+                            "data": "$data$",
+                            "parentElementId": "%parentElementId%-dataObjectListItem",
+                            "tooltip": "$tooltip$",
+                            "click_action_trait": "$click_action_trait$"
+                          }
+                        }
+                      ],
+                      "prps": {
+                        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                      }
+                    },
+                    {
+                      "id": "%parentElementId%-dataSourceEntityAttributeListItem",
+                      "condition": {
+                        "operator": "all",
+                        "comparisons": [
+                          {
+                            "operator": "isFalsy",
+                            "value": "$hasChildren$"
+                          },
+                          {
+                            "operator": "isEqual",
+                            "value": "%list_identifier%",
+                            "compareValue": "data_sources_list_folder_item_child"
+                          }
+                        ]
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/dataSourceEntityAttributeListItem",
+                          "traitPrps": {
+                            "nodeId": "%nodeId%",
+                            "list_identifier": "%list_identifier%",
+                            "label": "%name%",
+                            "data": "$data$",
+                            "parentElementId": "%parentElementId%-dataSourceEntityAttributeListItem",
+                            "tooltip": "$tooltip$"
+                          }
+                        }
+                      ],
+                      "prps": {
+                        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                      }
+                    },
+                    {
+                      "id": "%parentElementId%-tools",
+                      "relId": "tools",
+                      "type": "containerSimple",
+                      "prps": {
+                        "dir": "horizontal",
+                        "vis": false,
+                        "marginLeft": "mediumPadding",
+                        "scps": [
+                          {
+                            "triggers": [
+                              {
+                                "event": "onStateChange",
+                                "source": "||dropdownHeaderClickCapturer||",
+                                "key": "hovered"
+                              }
+                            ],
+                            "actions": [
+                              {
+                                "type": "queueDelayedActions",
+                                "delay": 10,
+                                "actions": [
+                                  {
+                                    "type": "setState",
+                                    "key": "vis",
+                                    "value": "{{state.||dropdownHeaderClickCapturer||.hovered}}"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                      },
+                      "wgts": [
+                        {
+                          "id": "%parentElementId%-addObjectButton",
+                          "condition": {
+                            "operator": "all",
+                            "comparisons": [
+                              {
+                                "operator": "containedInCase",
+                                "value": "%list_identifier%",
+                                "compareValue": [
+                                  "data_objects_list_folder_item",
+                                  "workspaces_list_folder_item",
+                                  "pending_approvals_list_folder_item",
+                                  "data_sources_list_folder_item"
+                                ]
+                              },
+                              {
+                                "operator": "isNotEqual",
+                                "value": "$data.stt_cde$",
+                                "compareValue": "Pending_Approval"
+                              },
+                              {
+                                "operator": "isTruthy",
+                                "value": "{{state.||objectBuilder||.vis}}"
+                              }
+                            ]
+                          },
+                          "prps": {
+                            "vis": false,
+                            "scps": [
+                              {
+                                "triggers": [
+                                  {
+                                    "event": "onMount"
+                                  }
+                                ],
+                                "actions": [
+                                  {
+                                    "type": "applyComparison",
+                                    "operator": "isTruthy",
+                                    "value": "{{state.||objectBuilder||.vis}}",
+                                    "branch": {
+                                      "true": [
+                                        {
+                                          "type": "setState",
+                                          "key": "vis",
+                                          "value": true
+                                        }
+                                      ],
+                                      "false": [
+                                        {
+                                          "type": "setState",
+                                          "key": "vis",
+                                          "value": false
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                          },
+                          "traits": [
+                            {
+                              "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/addObjectButton",
+                              "traitPrps": {
+                                "parentElementId": "%parentElementId%-addObjectButton",
+                                "data": "$data$"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json/wgts/0",
+    "component": {
+      "id": "%parentElementId%-innerContainerListItem",
+      "type": "%innerContainerType%",
+      "prps": {
+        "data": {
+          "nodeId": "%nodeId%",
+          "parentNodeId": "%parentNodeId%",
+          "spread-": "$data$"
+        },
+        "height": "100%",
+        "width": "100%",
+        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+      },
+      "wgts": [
+        {
+          "scope": "dropdownHeaderClickCapturer",
+          "id": "%parentElementId%-innerContainerListItem-clickable",
+          "type": "container",
+          "auth": [
+            "tooltipMda"
+          ],
+          "prps": {
+            "canHover": true,
+            "canClick": true,
+            "height": "100%",
+            "width": "100%",
+            "tooltipZIndex": 10005,
+            "morphProps": [
+              "tooltipMda"
+            ],
+            "tooltipMda": {
+              "morphVariable": "res",
+              "morphActions": [
+                {
+                  "type": "applyComparison",
+                  "operator": "isTruthy",
+                  "value": "$tooltip$",
+                  "branch": {
+                    "true": [
+                      {
+                        "type": "setVariable",
+                        "name": "res",
+                        "value": {
+                          "position": "right-start",
+                          "type": "containerSimple",
+                          "prps": {
+                            "width": "fit-content",
+                            "backgroundColor": "lightSecondary",
+                            "padding": true,
+                            "paddingSize": "tinyPadding",
+                            "roundedBorders": true
+                          },
+                          "wgts": [
+                            {
+                              "type": "label",
+                              "prps": {
+                                "color": "iconPrimary",
+                                "fontSize": "fontSizeSmall",
+                                "cpt": "%tooltip.0%"
+                              }
+                            },
+                            {
+                              "condition": {
+                                "operator": "isTruthy",
+                                "value": "$tooltip.1%"
+                              },
+                              "type": "label",
+                              "prps": {
+                                "marginTop": "tinyPadding",
+                                "color": "mediumGrey",
+                                "fontSize": "fontSizeSmall",
+                                "cpt": "%tooltip.1%"
+                              }
+                            },
+                            {
+                              "condition": {
+                                "operator": "isTruthy",
+                                "value": "$tooltip.2%"
+                              },
+                              "type": "label",
+                              "prps": {
+                                "marginTop": "tinyPadding",
+                                "color": "mediumGrey",
+                                "fontSize": "fontSizeSmall",
+                                "cpt": "%tooltip.2%"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+          },
+          "traits": [
+            {
+              "condition": {
+                "operator": "isTruthy",
+                "value": "$contextMenu$"
+              },
+              "trait": "%contextMenu%",
+              "traitPrps": {
+                "nodeId": "%nodeId%",
+                "parentNodeId": "%parentNodeId%",
+                "rowId": "%nodeId%-inner",
+                "rowName": "%name%",
+                "rowData": "$data$",
+                "list_identifier": "%list_identifier%"
+              }
+            },
+            {
+              "condition": {
+                "operator": "isTruthy",
+                "value": "$click_action_trait$"
+              },
+              "trait": "$click_action_trait.trait$",
+              "traitPrps": {
+                "nodeId": "%nodeId%",
+                "parentNodeId": "%parentNodeId%",
+                "rowId": "%nodeId%-inner",
+                "rowName": "%name%",
+                "rowData": "$data$",
+                "list_identifier": "%list_identifier%",
+                "overrideCurrentTab": true,
+                "spread-": "$click_action_trait.traitPrps$"
+              }
+            }
+          ],
+          "wgts": [
+            {
+              "id": "%parentElementId%-dropdownHeaderListItem",
+              "condition": {
+                "operator": "isTruthy",
+                "value": "$hasChildren$"
+              },
+              "traits": [
+                {
+                  "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/dropdownHeaderListItem",
+                  "traitPrps": {
+                    "nodeId": "%nodeId%",
+                    "name": "%name%",
+                    "custom_icon": "$custom_icon$",
+                    "list_identifier": "%list_identifier%",
+                    "data": "$data$",
+                    "parentElementId": "%parentElementId%-dropdownHeaderListItem",
+                    "tooltip": "$tooltip$",
+                    "click_action_trait": "$click_action_trait$"
+                  }
+                }
+              ],
+              "prps": {
+                "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+              }
+            },
+            {
+              "id": "%parentElementId%-listItemContainer",
+              "type": "containerSimple",
+              "prps": {
+                "flex": true,
+                "dir": "horizontal",
+                "crossAxisAlign": "center",
+                "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+              },
+              "wgts": [
+                {
+                  "id": "%parentElementId%-dataObjectListItem",
+                  "condition": {
+                    "operator": "all",
+                    "comparisons": [
+                      {
+                        "operator": "isFalsy",
+                        "value": "$hasChildren$"
+                      },
+                      {
+                        "operator": "containedInCase",
+                        "value": "%list_identifier%",
+                        "compareValue": [
+                          "data_objects_list_folder_item",
+                          "workspaces_list_folder_item",
+                          "pending_approvals_list_folder_item"
+                        ]
+                      }
+                    ]
+                  },
+                  "traits": [
+                    {
+                      "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/dataObjectListItem",
+                      "traitPrps": {
+                        "nodeId": "%nodeId%",
+                        "list_identifier": "%list_identifier%",
+                        "label": "%name%",
+                        "data": "$data$",
+                        "parentElementId": "%parentElementId%-dataObjectListItem",
+                        "tooltip": "$tooltip$",
+                        "click_action_trait": "$click_action_trait$"
+                      }
+                    }
+                  ],
+                  "prps": {
+                    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                  }
+                },
+                {
+                  "id": "%parentElementId%-dataSourceEntityAttributeListItem",
+                  "condition": {
+                    "operator": "all",
+                    "comparisons": [
+                      {
+                        "operator": "isFalsy",
+                        "value": "$hasChildren$"
+                      },
+                      {
+                        "operator": "isEqual",
+                        "value": "%list_identifier%",
+                        "compareValue": "data_sources_list_folder_item_child"
+                      }
+                    ]
+                  },
+                  "traits": [
+                    {
+                      "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/dataSourceEntityAttributeListItem",
+                      "traitPrps": {
+                        "nodeId": "%nodeId%",
+                        "list_identifier": "%list_identifier%",
+                        "label": "%name%",
+                        "data": "$data$",
+                        "parentElementId": "%parentElementId%-dataSourceEntityAttributeListItem",
+                        "tooltip": "$tooltip$"
+                      }
+                    }
+                  ],
+                  "prps": {
+                    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                  }
+                },
+                {
+                  "id": "%parentElementId%-tools",
+                  "relId": "tools",
+                  "type": "containerSimple",
+                  "prps": {
+                    "dir": "horizontal",
+                    "vis": false,
+                    "marginLeft": "mediumPadding",
+                    "scps": [
+                      {
+                        "triggers": [
+                          {
+                            "event": "onStateChange",
+                            "source": "||dropdownHeaderClickCapturer||",
+                            "key": "hovered"
+                          }
+                        ],
+                        "actions": [
+                          {
+                            "type": "queueDelayedActions",
+                            "delay": 10,
+                            "actions": [
+                              {
+                                "type": "setState",
+                                "key": "vis",
+                                "value": "{{state.||dropdownHeaderClickCapturer||.hovered}}"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                  },
+                  "wgts": [
+                    {
+                      "id": "%parentElementId%-addObjectButton",
+                      "condition": {
+                        "operator": "all",
+                        "comparisons": [
+                          {
+                            "operator": "containedInCase",
+                            "value": "%list_identifier%",
+                            "compareValue": [
+                              "data_objects_list_folder_item",
+                              "workspaces_list_folder_item",
+                              "pending_approvals_list_folder_item",
+                              "data_sources_list_folder_item"
+                            ]
+                          },
+                          {
+                            "operator": "isNotEqual",
+                            "value": "$data.stt_cde$",
+                            "compareValue": "Pending_Approval"
+                          },
+                          {
+                            "operator": "isTruthy",
+                            "value": "{{state.||objectBuilder||.vis}}"
+                          }
+                        ]
+                      },
+                      "prps": {
+                        "vis": false,
+                        "scps": [
+                          {
+                            "triggers": [
+                              {
+                                "event": "onMount"
+                              }
+                            ],
+                            "actions": [
+                              {
+                                "type": "applyComparison",
+                                "operator": "isTruthy",
+                                "value": "{{state.||objectBuilder||.vis}}",
+                                "branch": {
+                                  "true": [
+                                    {
+                                      "type": "setState",
+                                      "key": "vis",
+                                      "value": true
+                                    }
+                                  ],
+                                  "false": [
+                                    {
+                                      "type": "setState",
+                                      "key": "vis",
+                                      "value": false
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "path": "dashboard/@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/index.json"
+                      },
+                      "traits": [
+                        {
+                          "trait": "@l2_dashboards/reskin/explorers/objectLibrary/explorerListItem/addObjectButton",
+                          "traitPrps": {
+                            "parentElementId": "%parentElementId%-addObjectButton",
+                            "data": "$data$"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageCompareDOs/container/firstCompareGrid/functional/setGridOnGridTypeChanged.json/prps/scps/0/actions/2/branch/Data Source Query/0/value/traits/0/traitPrps",
+    "component": {
+      "relId": "firstCompareGridDataSourceQuery",
+      "gridId": "firstCompareGridDataSource",
+      "traitDataManager": "@l2_dashboards/reskin/pageCompareDOs/container/firstCompareGrid/functional/dataSourceGridManager/index",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageCompareDOs/container/secondCompareGrid/functional/setGridOnGridTypeChanged.json/prps/scps/0/actions/2/branch/Data Source Query/0/value/traits/0/traitPrps",
+    "component": {
+      "relId": "secondCompareGridDataSourceQuery",
+      "gridId": "secondCompareGridDataSource",
+      "traitDataManager": "@l2_dashboards/reskin/pageCompareDOs/container/secondCompareGrid/functional/dataSourceGridManager/index",
+      "is2ndCompare": true,
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageDataObject/DOFields/fieldForm/actions/cudDoFields.json/traitPrps",
+    "component": {
+      "scope": "string",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageDataObject/DOFields/fieldForm/onClickSaveFieldForm.json/prps/fireScript/actions/7/branch/true/1/branch/true/0/value/confirmButtonScript/actions/1/traits/0/traitPrps",
+    "component": {
+      "scope": "sCEF",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageDataObject/DOFields/fieldForm/onClickSaveFieldForm.json/prps/fireScript/actions/7/branch/true/1/branch/false/0/traits/0/traitPrps",
+    "component": {
+      "scope": "sCEF",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageDataObject/DOFields/fieldForm/onClickSaveFieldForm.json/prps/fireScript/actions/7/branch/false/0/traits/0/traitPrps",
+    "component": {
+      "scope": "sCEF",
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/pageDataObject/DORelationships/panelStoreObjectRelationship/index.json",
+    "component": {
+      "acceptPrps": {},
+      "scope": "panelStoreObjectRelationship",
+      "type": "containerSimple",
+      "prps": {
+        "vis": false,
+        "path": "dashboard/@l2_dashboards/reskin/pageDataObject/DORelationships/panelStoreObjectRelationship/index.json"
+      },
+      "traits": [
+        {
+          "trait": "@l2_modal_panel/index",
+          "traitPrps": {
+            "wgtsTop": [],
+            "wgtsMiddle": [
+              {
+                "type": "label",
+                "prps": {
+                  "whiteSpace": "pre",
+                  "cpt": "Stored object relationships are used to populate the Linked Objects list when building a data object."
+                }
+              }
+            ],
+            "wgtsBottom": [
+              {
+                "type": "containerSimple",
+                "prps": {
+                  "dir": "horizontal",
+                  "mainAxisAlign": "end"
+                },
+                "wgts": [
+                  {
+                    "traits": [
+                      {
+                        "trait": "@l2_dashboards/overrides/l2_buttons/primary/index",
+                        "traitPrps": {
+                          "cpt": "Close",
+                          "icon": "close"
+                        }
+                      }
+                    ],
+                    "prps": {
+                      "fireScript": {
+                        "actions": [
+                          {
+                            "type": "setState",
+                            "target": "||panelStoreObjectRelationship||",
+                            "key": "vis",
+                            "value": false
+                          }
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "def": {
+            "acceptPrps": {
+              "wgtsTop": {
+                "comment": "Wgts that are rendered at the top of the panel",
+                "type": "array"
+              },
+              "wgtsMiddle": {
+                "comment": "Wgts that are rendered in the middle of the panel",
+                "type": "array"
+              },
+              "wgtsBottom": {
+                "comment": "Wgts that are rendered at the bottom of the panel",
+                "type": "array"
+              },
+              "containerPrps": {
+                "type": "object",
+                "dft": {}
+              },
+              "width": {
+                "type": "string",
+                "dft": "40%"
+              },
+              "height": {
+                "type": "string"
+              },
+              "minWidth": {
+                "type": "string",
+                "dft": "600px"
+              },
+              "minHeight": {
+                "type": "string"
+              },
+              "maxWidth": {
+                "type": "string",
+                "dft": "100%"
+              },
+              "maxHeight": {
+                "type": "string",
+                "dft": "100%"
+              },
+              "zIndex": {
+                "type": "integer",
+                "dft": 10000
+              },
+              "canEscapeToCloseModal": {
+                "type": "boolean",
+                "dft": true
+              }
+            },
+            "scope": "modalPanel",
+            "traits": [
+              {
+                "condition": {
+                  "operator": "isTruthy",
+                  "value": "$canEscapeToCloseModal$"
+                },
+                "trait": "@l2_modal_panel/functional/updatePanelStackOnVisChanged",
+                "traitPrps": {}
+              }
+            ],
+            "type": "containerSimple",
+            "container": "systemDashboard",
+            "prps": {
+              "vis": false,
+              "position": "absolute",
+              "top": 0,
+              "left": 0,
+              "height": "100%",
+              "width": "100%",
+              "mainAxisAlign": "center",
+              "crossAxisAlign": "center",
+              "zIndex": "$zIndex$",
+              "backgroundColor": "rgba(0, 0, 0, 0.5)",
+              "padding": true,
+              "paddingSize": "bigPadding",
+              "path": "dashboard/@l2_modal_panel/index.json"
+            },
+            "wgts": [
+              {
+                "relId": "panelInner",
+                "type": "containerSimple",
+                "prps": {
+                  "width": "clamp(min(%minWidth%, %maxWidth%), max(%minWidth%, %maxWidth%), %width%)",
+                  "maxHeight": "$maxHeight$",
+                  "minHeight": "$minHeight$",
+                  "height": "$height$",
+                  "roundedBorders": true,
+                  "backgroundColor": "iconPrimary",
+                  "path": "dashboard/@l2_modal_panel/index.json"
+                },
+                "wgts": [
+                  {
+                    "type": "containerSimple",
+                    "prps": {
+                      "flex": true,
+                      "mainAxisAlign": "start",
+                      "gap": "smallPadding",
+                      "padding": true,
+                      "spread-": "$containerPrps$",
+                      "path": "dashboard/@l2_modal_panel/index.json"
+                    },
+                    "wgts": [
+                      {
+                        "relId": "top",
+                        "type": "containerSimple",
+                        "wgts": "$wgtsTop$"
+                      },
+                      {
+                        "type": "containerSimple",
+                        "prps": {
+                          "flex": true,
+                          "overflowY": "auto",
+                          "path": "dashboard/@l2_modal_panel/index.json"
+                        },
+                        "wgts": "$wgtsMiddle$"
+                      },
+                      {
+                        "relId": "bottom",
+                        "type": "containerSimple",
+                        "condition": {
+                          "operator": "isNotFalsy",
+                          "value": "$wgtsBottom$"
+                        },
+                        "wgts": "$wgtsBottom$"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "path": "dashboard/@l2_dashboards/reskin/panels/DORequestToPublishPanel/container/index.json/wgts/1",
+    "component": {
+      "relId": "changeDescription",
+      "trait": "@l2_inputs/formInput/index",
+      "traitPrps": {
+        "label": "Describe Changes made and Reasons for Request",
+        "prpsInput": {
+          "mandatory": true,
+          "maxLength": 4000,
+          "multiline": true
+        }
+      },
+      "prps": {
+        "padding": true,
+        "paddingSize": "padding noPadding noPadding noPadding",
+        "path": "dashboard/@l2_dashboards/reskin/panels/DORequestToPublishPanel/container/index.json"
+      },
+      "traits": []
+    }
+  },
+  {
+    "path": "dashboard/@l2_menu_tree/functional/setDataLegoz.json",
+    "component": {
+      "acceptPrps": {},
+      "traits": [
+        {
+          "trait": "@l2_menu_tree/functional/onMountSetData",
+          "def": {
+            "acceptPrps": {},
+            "prps": {
+              "scps": [
+                {
+                  "id": "sOMSD",
+                  "triggers": [
+                    {
+                      "event": "onMount",
+                      "source": "||menuTree.container||"
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "setState",
+                      "target": "||menuTree.container||",
+                      "key": "loading",
+                      "value": true
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_menu_tree/functional/actions/setData",
+                          "traitPrps": {
+                            "scriptId": "sOMSD",
+                            "organisationCode": "{{sOMSD.state.systemDashboard.userOrganisation}}"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "setState",
+                      "target": "||menuTree.container||",
+                      "key": "loading",
+                      "value": false
+                    }
+                  ]
+                }
+              ],
+              "path": "dashboard/@l2_menu_tree/functional/onMountSetData.json"
+            }
+          }
+        },
+        {
+          "trait": "@l2_menu_tree/functional/onOrgChangeSetData",
+          "def": {
+            "acceptPrps": {},
+            "prps": {
+              "scps": [
+                {
+                  "id": "sOCSD",
+                  "triggers": [
+                    {
+                      "event": "onStateChange",
+                      "source": "systemDashboard",
+                      "key": "userOrganisation"
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": "setState",
+                      "target": "||menuTree.container||",
+                      "key": "loading",
+                      "value": true
+                    },
+                    {
+                      "type": "setState",
+                      "target": "||menuTree.inner||",
+                      "key": "vis",
+                      "value": false
+                    },
+                    {
+                      "type": "setState",
+                      "target": "||menuTree.tree||",
+                      "key": "deleteKeys",
+                      "value": [
+                        "staticData"
+                      ]
+                    },
+                    {
+                      "traits": [
+                        {
+                          "trait": "@l2_menu_tree/functional/actions/setData",
+                          "traitPrps": {
+                            "scriptId": "sOCSD",
+                            "organisationCode": "{{sOCSD.state.systemDashboard.userOrganisation}}"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "setState",
+                      "target": "||menuTree.container||",
+                      "key": "loading",
+                      "value": false
+                    }
+                  ]
+                }
+              ],
+              "path": "dashboard/@l2_menu_tree/functional/onOrgChangeSetData.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "path": "dashboard/@l2_menu_tree/functional/setDataLegoz.json"
+      }
+    }
+  },
+  {
+    "path": "dashboard/@l2_shell/appDashboard.json/wgts/1/wgts/1/wgts/1",
+    "component": {
+      "scope": [
+        "appTabManager",
+        "canvasTabManager"
+      ],
+      "id": "appTabManager",
+      "traits": [
+        {
+          "trait": "@l2_shell/appTabManager/index",
+          "traitPrps": {},
+          "def": {
+            "acceptPrps": {},
+            "traits": [
+              {
+                "trait": "@l2_tab_manager/index",
+                "traitPrps": {}
+              },
+              "@l2_shell/appTabManager/tOpenTab",
+              "@l2_shell/appTabManager/tOpenTabComplex",
+              "@l2_shell/appTabManager/tReplaceCurrentTabWith",
+              "@l2_shell/appTabManager/activateTabWhenAnotherCloses",
+              "@l2_shell/appTabManager/setMenuTreeDataWhenTabChanges"
+            ],
+            "prps": {
+              "flows": [
+                {
+                  "fromKey": "openTabIdCurrent",
+                  "toKey": "currentlyLoadedTabData",
+                  "mapFunctionString": "(v, { loadedTabsData }) => loadedTabsData.find(t => t.tabId === v) || null"
+                },
+                {
+                  "from": "||appDashboard.menuTree||",
+                  "fromKey": "selectedDashboardData",
+                  "toKey": "tOpenTab"
+                }
+              ],
+              "scps": [
+                {
+                  "triggers": [
+                    {
+                      "event": "onStateChange",
+                      "key": "openTabIdCurrent"
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "srcAction": {
+                        "path": "@l2_dashboards/reskin/explorers/objectLibrary/functional/resetLinkedDataObjects"
+                      },
+                      "objectLibraryRepeaterId": "||objectLibrary.repeater||"
+                    }
+                  ]
+                }
+              ],
+              "path": "dashboard/@l2_shell/appTabManager/index.json"
+            }
+          }
+        }
+      ],
+      "prps": {
+        "flex": true,
+        "loadedTabsData": [],
+        "path": "dashboard/@l2_shell/appDashboard.json"
+      },
+      "wgts": []
+    }
+  }
+]
